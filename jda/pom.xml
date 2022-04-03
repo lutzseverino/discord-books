@@ -10,7 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>st.networkers.discord-books.jda</groupId>
-    <artifactId>jda</artifactId>
+    <artifactId>discord-books-jda</artifactId>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
