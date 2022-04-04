@@ -1,9 +1,6 @@
 package st.networkers.discordbooks.jda.book;
 
 import net.dv8tion.jda.api.entities.MessageChannel;
-import net.dv8tion.jda.api.interactions.components.ActionRow;
-import net.dv8tion.jda.api.interactions.components.buttons.Button;
-import net.dv8tion.jda.api.requests.restaction.MessageAction;
 import st.networkers.discordbooks.book.Book;
 
 public class JDABook extends Book {
