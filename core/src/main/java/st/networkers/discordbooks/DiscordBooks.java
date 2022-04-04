@@ -1,23 +1,26 @@
 package st.networkers.discordbooks;
 
 import st.networkers.discordbooks.book.Book;
+import st.networkers.discordbooks.cache.Cache;
 import st.networkers.discordbooks.cache.BookCache;
-import st.networkers.discordbooks.cache.BookCacheImpl;
 
 public class DiscordBooks {
-    protected final BookCache books = new BookCacheImpl();
+    protected final Cache<Book> books = new BookCache();
 
     public void addBooks(Book... books) {
-        for (Book book : books) {
-            this.books.add(book.getName(), book);
-        }
+        for (Book book : books)
+            this.books.add(book);
+    }
+
+    public void addBook(Book book) {
+        addBooks(book);
     }
 
     public Book getBook(String name) {
         return books.get(name);
     }
 
-    public BookCache getBooks() {
+    public Cache<Book> getBooks() {
         return books;
     }
 }
