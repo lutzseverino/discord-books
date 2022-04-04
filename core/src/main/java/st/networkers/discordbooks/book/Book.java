@@ -1,4 +1,4 @@
-package st.networkers.discordBooks.book;
+package st.networkers.discordbooks.book;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,5 +26,17 @@ public abstract class Book {
 
     List<Page<?>> getPages() {
         return pages;
+    }
+
+    Page<?> getNextPage(Page<?> page) {
+        int index = pages.indexOf(page);
+
+        return index == -1 ? null : pages.get(index + 1);
+    }
+
+    Page<?> getPreviousPage(Page<?> page) {
+        int index = pages.indexOf(page);
+
+        return index == -1 ? null : pages.get(index - 1);
     }
 }
