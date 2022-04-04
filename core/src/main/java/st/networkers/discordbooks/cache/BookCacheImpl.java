@@ -1,6 +1,6 @@
-package st.networkers.discordBooks.cache;
+package st.networkers.discordbooks.cache;
 
-import st.networkers.discordBooks.book.Book;
+import st.networkers.discordbooks.book.Book;
 
 import java.util.HashMap;
 import java.util.Map;

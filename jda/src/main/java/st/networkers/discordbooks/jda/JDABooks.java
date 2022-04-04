@@ -1,8 +1,8 @@
-package st.networkers.discordBooks.jda;
+package st.networkers.discordbooks.jda;
 
 import net.dv8tion.jda.api.JDA;
-import st.networkers.discordBooks.DiscordBooks;
-import st.networkers.discordBooks.jda.listeners.ButtonListener;
+import st.networkers.discordbooks.DiscordBooks;
+import st.networkers.discordbooks.jda.listeners.ButtonListener;
 
 public class JDABooks extends DiscordBooks {
 

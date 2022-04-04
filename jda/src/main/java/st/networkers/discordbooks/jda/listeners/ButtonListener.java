@@ -1,8 +1,8 @@
-package st.networkers.discordBooks.jda.listeners;
+package st.networkers.discordbooks.jda.listeners;
 
 import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
-import st.networkers.discordBooks.cache.BookCache;
+import st.networkers.discordbooks.cache.BookCache;
 
 public class ButtonListener extends ListenerAdapter {
     private final BookCache books;

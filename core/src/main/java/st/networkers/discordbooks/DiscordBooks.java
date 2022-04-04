@@ -1,8 +1,8 @@
-package st.networkers.discordBooks;
+package st.networkers.discordbooks;
 
-import st.networkers.discordBooks.book.Book;
-import st.networkers.discordBooks.cache.BookCache;
-import st.networkers.discordBooks.cache.BookCacheImpl;
+import st.networkers.discordbooks.book.Book;
+import st.networkers.discordbooks.cache.BookCache;
+import st.networkers.discordbooks.cache.BookCacheImpl;
 
 public class DiscordBooks {
     protected final BookCache books = new BookCacheImpl();
