@@ -1,6 +1,6 @@
 package st.networkers.discordbooks.send;
 
-public interface Sendable {
+public interface SendableEmbed {
     Object getObject();
 
     String getId();
