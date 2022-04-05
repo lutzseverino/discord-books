@@ -7,6 +7,6 @@ import st.networkers.discordbooks.jda.listeners.ButtonListener;
 public class JDABooks extends DiscordBooks {
 
     public JDABooks(JDA jdaInstance) {
-        jdaInstance.addEventListener(new ButtonListener(getBooks()));
+        jdaInstance.addEventListener(new ButtonListener(getBooks(), getPages()));
     }
 }
