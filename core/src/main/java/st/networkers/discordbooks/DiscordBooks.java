@@ -28,7 +28,7 @@ public class DiscordBooks {
         return books;
     }
 
-    public Cache<Book.Page> getPages() {
+    public Cache<Book.Page> getAllPages() {
         return pages;
     }
 }
