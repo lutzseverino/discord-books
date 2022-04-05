@@ -12,7 +12,7 @@ public class PageCache implements Cache<Book.Page> {
         pages.add(page);
     }
 
-    @Override public Book.Page get(String name) {
+    @Override public Book.Page get(String id) {
         return null;
     }
 

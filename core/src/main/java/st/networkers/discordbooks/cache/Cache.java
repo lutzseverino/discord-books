@@ -3,8 +3,7 @@ package st.networkers.discordbooks.cache;
 public interface Cache<T> {
     void add(T t);
 
-    // TODO: Abstract to be usable by other classes
-    T get(String name);
+    T get(String id);
 
     Iterable<T> getAll();
 

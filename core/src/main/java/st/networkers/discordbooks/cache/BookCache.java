@@ -12,8 +12,8 @@ public class BookCache implements Cache<Book> {
         books.put(book.getName(), book);
     }
 
-    @Override public Book get(String name) {
-        return books.get(name);
+    @Override public Book get(String id) {
+        return books.get(id);
     }
 
     @Override public Iterable<Book> getAll() {
