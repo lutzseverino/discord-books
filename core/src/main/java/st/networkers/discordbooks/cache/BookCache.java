@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class BookCache implements Cache<Book> {
-    public final Map<String, Book> books = new HashMap<>();
+    private final Map<String, Book> books = new HashMap<>();
 
     @Override public void add(Book book) {
         books.put(book.getName(), book);
@@ -14,6 +14,10 @@ public class BookCache implements Cache<Book> {
 
     @Override public Book get(String name) {
         return books.get(name);
+    }
+
+    @Override public Iterable<Book> getAll() {
+        return books.values();
     }
 
     @Override public void remove(String name) {

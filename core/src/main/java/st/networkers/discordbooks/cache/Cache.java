@@ -1,11 +1,12 @@
 package st.networkers.discordbooks.cache;
 
-import st.networkers.discordbooks.book.Book;
-
 public interface Cache<T> {
     void add(T t);
 
-    Book get(String name);
+    // TODO: Abstract to be usable by other classes
+    T get(String name);
+
+    Iterable<T> getAll();
 
     void remove(String name);
 
