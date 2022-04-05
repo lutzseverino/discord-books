@@ -19,14 +19,19 @@
 
     <dependencies>
         <dependency>
+            <groupId>st.networkers.discord-books</groupId>
+            <artifactId>discord-books-core</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>build</scope>
+        </dependency>
+        <dependency>
             <groupId>net.dv8tion</groupId>
             <artifactId>JDA</artifactId>
             <scope>build</scope>
         </dependency>
         <dependency>
-            <groupId>st.networkers.discord-books</groupId>
-            <artifactId>discord-books-core</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <groupId>com.google.code.findbugs</groupId>
+            <artifactId>jsr305</artifactId>
             <scope>build</scope>
         </dependency>
     </dependencies>

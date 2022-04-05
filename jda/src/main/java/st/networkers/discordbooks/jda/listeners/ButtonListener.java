@@ -5,6 +5,9 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import st.networkers.discordbooks.book.Book;
 import st.networkers.discordbooks.cache.Cache;
 
+import javax.annotation.Nonnull;
+
+
 public class ButtonListener extends ListenerAdapter {
     private final Cache<? extends Book> books;
 
@@ -12,7 +15,7 @@ public class ButtonListener extends ListenerAdapter {
         this.books = books;
     }
 
-    @Override public void onButtonInteraction(ButtonInteractionEvent event) {
+    @Override public void onButtonInteraction(@Nonnull ButtonInteractionEvent event) {
         // TODO: Implement button listener
     }
 }
