@@ -6,12 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Book {
-    protected final String name;
+    protected String name;
     protected final ArrayList<Page> pages = new ArrayList<>();
-
-    public Book(String name) {
-        this.name = name;
-    }
 
     /**
      * @param pages the pages to add
@@ -68,12 +64,21 @@ public abstract class Book {
         return name;
     }
 
+    /**
+     * @param name the name of the book
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public class Page {
-        Sendable content;
-        Book book = Book.this;
+        private final Sendable content;
+        private final Book book = Book.this;
+        private final String id;
 
         public Page(Sendable content) {
             this.content = content;
+            this.id = content.getObject().toString();
         }
 
         /**
@@ -83,8 +88,15 @@ public abstract class Book {
             return content;
         }
 
+        /**
+         * @return the book this page is in
+         */
         public Book getBook() {
             return book;
+        }
+
+        public String getId() {
+            return id;
         }
     }
 }
