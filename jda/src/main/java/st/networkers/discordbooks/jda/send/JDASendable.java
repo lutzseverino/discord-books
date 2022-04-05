@@ -3,14 +3,14 @@ package st.networkers.discordbooks.jda.send;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.entities.MessageEmbed;
-import net.dv8tion.jda.api.requests.restaction.MessageAction;
 import st.networkers.discordbooks.send.Sendable;
 
 public class JDASendable implements Sendable {
     private final Message message;
     private final MessageEmbed messageEmbed;
     private final MessageChannel channel;
-    private MessageAction action;
+    private Object sendableObject;
+
 
     private JDASendable(Message message, MessageEmbed messageEmbed, MessageChannel channel) {
         this.message = message;
@@ -27,11 +27,16 @@ public class JDASendable implements Sendable {
     }
 
     @Override public void send() {
-        if (message != null)
-            action = channel.sendMessage(message);
-        else if (messageEmbed != null)
-            action = channel.sendMessageEmbeds(messageEmbed);
+        if (message != null) {
+            channel.sendMessage(message).queue();
+            sendableObject = message;
+        } else if (messageEmbed != null) {
+            channel.sendMessageEmbeds(messageEmbed).queue();
+            sendableObject = messageEmbed;
+        }
+    }
 
-        action.queue();
+    @Override public Object get() {
+        return sendableObject;
     }
 }
