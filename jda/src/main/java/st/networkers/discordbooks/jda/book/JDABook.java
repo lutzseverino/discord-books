@@ -2,12 +2,11 @@ package st.networkers.discordbooks.jda.book;
 
 import net.dv8tion.jda.api.entities.MessageChannel;
 import st.networkers.discordbooks.book.Book;
+import st.networkers.discordbooks.jda.send.JDAMessage;
+import st.networkers.discordbooks.jda.send.JDAMessageEmbed;
+import st.networkers.discordbooks.send.Sendable;
 
 public class JDABook extends Book {
-
-    public JDABook(String name) {
-        super(name);
-    }
 
     /**
      * Sends the first book page to a specified
@@ -27,6 +26,16 @@ public class JDABook extends Book {
      * @param index   the page number to send
      */
     public void sendBook(MessageChannel channel, int index) {
-        pages.get(index).getContent().send();
+        Sendable sendable = pages.get(index).getContent();
+
+        if (sendable instanceof JDAMessage) {
+            JDAMessage jdaMessage = (JDAMessage) sendable;
+            channel.sendMessage(jdaMessage.getObject()).queue();
+        } else if (sendable instanceof JDAMessageEmbed) {
+            JDAMessageEmbed jdaMessageEmbed = (JDAMessageEmbed) sendable;
+            channel.sendMessageEmbeds(jdaMessageEmbed.getObject()).queue();
+        } else {
+            throw new IllegalArgumentException("Page sendable is neither a JDAMessage or JDAMessageEmbed");
+        }
     }
 }
