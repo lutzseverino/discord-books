@@ -7,7 +7,7 @@ public interface Cache<T> {
 
     Iterable<T> getAll();
 
-    void remove(String name);
+    void remove(String id);
 
     void remove(T t);
 }

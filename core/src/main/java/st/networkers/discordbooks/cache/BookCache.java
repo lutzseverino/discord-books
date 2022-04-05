@@ -20,8 +20,8 @@ public class BookCache implements Cache<Book> {
         return books.values();
     }
 
-    @Override public void remove(String name) {
-        books.remove(name);
+    @Override public void remove(String id) {
+        books.remove(id);
     }
 
     @Override public void remove(Book book) {
