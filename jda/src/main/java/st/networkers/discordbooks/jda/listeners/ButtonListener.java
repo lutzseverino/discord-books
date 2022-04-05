@@ -4,7 +4,6 @@ import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import st.networkers.discordbooks.book.Book;
 import st.networkers.discordbooks.cache.Cache;
-import st.networkers.discordbooks.jda.book.JDABook;
 
 import javax.annotation.Nonnull;
 
