@@ -3,13 +3,17 @@ package st.networkers.discordbooks;
 import st.networkers.discordbooks.book.Book;
 import st.networkers.discordbooks.cache.Cache;
 import st.networkers.discordbooks.cache.BookCache;
+import st.networkers.discordbooks.cache.PageCache;
 
 public class DiscordBooks {
     protected final Cache<Book> books = new BookCache();
+    protected final Cache<Book.Page> pages = new PageCache();
 
     public void addBooks(Book... books) {
-        for (Book book : books)
+        for (Book book : books) {
             this.books.add(book);
+            book.getPages().forEach(this.pages::add);
+        }
     }
 
     public void addBook(Book book) {
@@ -22,5 +26,9 @@ public class DiscordBooks {
 
     public Cache<Book> getBooks() {
         return books;
+    }
+
+    public Cache<Book.Page> getPages() {
+        return pages;
     }
 }
