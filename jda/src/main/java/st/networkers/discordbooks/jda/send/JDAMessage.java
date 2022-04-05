@@ -2,9 +2,9 @@ package st.networkers.discordbooks.jda.send;
 
 import net.dv8tion.jda.api.MessageBuilder;
 import net.dv8tion.jda.api.entities.Message;
-import st.networkers.discordbooks.send.Sendable;
+import st.networkers.discordbooks.send.SendableMessage;
 
-public class JDAMessage implements Sendable {
+public class JDAMessage implements SendableMessage {
     private final Message message;
 
     public JDAMessage(Message message) {
