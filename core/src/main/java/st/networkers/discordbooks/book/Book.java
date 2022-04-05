@@ -68,8 +68,9 @@ public abstract class Book {
         return name;
     }
 
-    public static class Page {
+    public class Page {
         Sendable content;
+        Book book = Book.this;
 
         public Page(Sendable content) {
             this.content = content;
@@ -80,6 +81,10 @@ public abstract class Book {
          */
         public Sendable getContent() {
             return content;
+        }
+
+        public Book getBook() {
+            return book;
         }
     }
 }
