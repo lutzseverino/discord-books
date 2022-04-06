@@ -1,12 +1,16 @@
 package st.networkers.discordbooks.jda.book;
 
+import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageChannel;
+import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.interactions.components.buttons.Button;
 import net.dv8tion.jda.api.requests.restaction.MessageAction;
 import st.networkers.discordbooks.book.Book;
-import st.networkers.discordbooks.jda.send.JDAMessage;
-import st.networkers.discordbooks.jda.send.JDAMessageEmbed;
-import st.networkers.discordbooks.send.SendableMessage;
+import st.networkers.discordbooks.jda.message.JDAMessage;
+import st.networkers.discordbooks.jda.message.JDAMessageEmbed;
+import st.networkers.discordbooks.message.Sendable;
+
+import java.util.Arrays;
 
 public class JDABook extends Book {
     private Button backButton;
@@ -30,14 +34,14 @@ public class JDABook extends Book {
      * @param index   the page number to send
      */
     public void send(MessageChannel channel, int index) {
-        SendableMessage sendableMessage = pages.get(index).getContent();
+        Sendable sendable = pages.get(index).getContent();
 
-        if (sendableMessage instanceof JDAMessage) {
-            JDAMessage jdaMessage = (JDAMessage) sendableMessage;
-            applyActionRow(channel.sendMessage(jdaMessage.getObject()), index);
-        } else if (sendableMessage instanceof JDAMessageEmbed) {
-            JDAMessageEmbed jdaMessageEmbed = (JDAMessageEmbed) sendableMessage;
-            applyActionRow(channel.sendMessageEmbeds(jdaMessageEmbed.getObject()), index);
+        if (sendable instanceof JDAMessage) {
+            JDAMessage jdaMessage = (JDAMessage) sendable;
+            applyActionRow(channel.sendMessage(jdaMessage.getMessage()), index);
+        } else if (sendable instanceof JDAMessageEmbed) {
+            JDAMessageEmbed jdaMessageEmbed = (JDAMessageEmbed) sendable;
+            applyActionRow(channel.sendMessageEmbeds(Arrays.asList(jdaMessageEmbed.getMessage())), index);
         } else
             throw new IllegalArgumentException("Page sendable at index " + index + " of book + \"" + this.getName() + "\" is neither a JDAMessage or JDAMessageEmbed");
     }
