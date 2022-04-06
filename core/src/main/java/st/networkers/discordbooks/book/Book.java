@@ -1,6 +1,6 @@
 package st.networkers.discordbooks.book;
 
-import st.networkers.discordbooks.send.SendableMessage;
+import st.networkers.discordbooks.message.Sendable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,8 +19,8 @@ public abstract class Book {
     /**
      * @param content the pages' content to add
      */
-    public final void addPages(SendableMessage... content) {
-        for (SendableMessage page : content)
+    public final void addPages(Sendable... content) {
+        for (Sendable page : content)
             this.pages.add(new Page(page));
     }
 
@@ -72,19 +72,19 @@ public abstract class Book {
     }
 
     public class Page {
-        private final SendableMessage content;
+        private final Sendable content;
         private final Book book = Book.this;
         private final String id;
 
-        public Page(SendableMessage content) {
+        public Page(Sendable content) {
             this.content = content;
-            this.id = content.getObject().toString();
+            this.id = content.getId();
         }
 
         /**
          * @return the content of the page
          */
-        public SendableMessage getContent() {
+        public Sendable getContent() {
             return content;
         }
 

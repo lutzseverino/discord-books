@@ -1,10 +1,10 @@
-package st.networkers.discordbooks.jda.send;
+package st.networkers.discordbooks.jda.message;
 
 import net.dv8tion.jda.api.MessageBuilder;
 import net.dv8tion.jda.api.entities.Message;
-import st.networkers.discordbooks.send.SendableMessage;
+import st.networkers.discordbooks.message.Sendable;
 
-public class JDAMessage implements SendableMessage {
+public class JDAMessage implements Sendable {
     private final Message message;
 
     public JDAMessage(Message message) {
@@ -15,7 +15,7 @@ public class JDAMessage implements SendableMessage {
         this.message = new MessageBuilder(message).build();
     }
 
-    @Override public Message getObject() {
+    @Override public Message getMessage() {
         return message;
     }
 
