@@ -1,5 +1,6 @@
 package st.networkers.discordbooks.cache;
 
+import org.jetbrains.annotations.NotNull;
 import st.networkers.discordbooks.book.Book;
 
 import java.util.HashMap;
@@ -24,7 +25,7 @@ public class PageCache implements Cache<Book.Page> {
         pages.remove(id);
     }
 
-    @Override public void remove(Book.Page page) {
+    @Override public void remove(@NotNull Book.Page page) {
         pages.remove(page.getId());
     }
 }

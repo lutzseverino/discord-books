@@ -1,5 +1,6 @@
 package st.networkers.discordbooks;
 
+import org.jetbrains.annotations.NotNull;
 import st.networkers.discordbooks.book.Book;
 import st.networkers.discordbooks.cache.Cache;
 import st.networkers.discordbooks.cache.BookCache;
@@ -9,7 +10,7 @@ public class DiscordBooks {
     protected final Cache<Book> books = new BookCache();
     protected final Cache<Book.Page> pages = new PageCache();
 
-    public void addBooks(Book... books) {
+    public void addBooks(@NotNull Book... books) {
         for (Book book : books) {
             this.books.add(book);
             book.getPages().forEach(this.pages::add);

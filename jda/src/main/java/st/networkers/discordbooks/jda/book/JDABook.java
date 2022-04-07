@@ -1,10 +1,9 @@
 package st.networkers.discordbooks.jda.book;
 
-import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageChannel;
-import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.interactions.components.buttons.Button;
 import net.dv8tion.jda.api.requests.restaction.MessageAction;
+import org.jetbrains.annotations.NotNull;
 import st.networkers.discordbooks.book.Book;
 import st.networkers.discordbooks.jda.message.JDAMessage;
 import st.networkers.discordbooks.jda.message.JDAMessageEmbed;
@@ -15,6 +14,10 @@ import java.util.Arrays;
 public class JDABook extends Book {
     private Button backButton;
     private Button nextButton;
+
+    public JDABook(String name) {
+        super(name);
+    }
 
     /**
      * Sends the first book page to a specified
@@ -64,7 +67,7 @@ public class JDABook extends Book {
      * @param action the message action to apply the buttons to
      * @param index  the index of the page
      */
-    private void applyActionRow(MessageAction action, int index) {
+    private void applyActionRow(@NotNull MessageAction action, int index) {
         action.setActionRow(backButton.withDisabled(index == 0), nextButton.withDisabled(pages.size() == index)).queue();
     }
 }

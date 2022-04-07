@@ -2,11 +2,9 @@ package st.networkers.discordbooks.jda.listeners;
 
 import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
+import org.jetbrains.annotations.NotNull;
 import st.networkers.discordbooks.book.Book;
 import st.networkers.discordbooks.cache.Cache;
-
-import javax.annotation.Nonnull;
-
 
 public class ButtonListener extends ListenerAdapter {
     private final Cache<? extends Book> books;
@@ -17,7 +15,7 @@ public class ButtonListener extends ListenerAdapter {
         this.pages = pages;
     }
 
-    @Override public void onButtonInteraction(@Nonnull ButtonInteractionEvent event) {
+    @Override public void onButtonInteraction(@NotNull ButtonInteractionEvent event) {
 
     }
 }
