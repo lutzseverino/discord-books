@@ -3,7 +3,7 @@ package st.networkers.discordbooks.jda.message;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import st.networkers.discordbooks.message.Sendable;
 
-public class JDAMessageEmbed implements Sendable {
+public class JDAMessageEmbed implements Sendable<MessageEmbed[]> {
     private final MessageEmbed[] embeds;
 
     public JDAMessageEmbed(MessageEmbed... message) {
@@ -12,9 +12,5 @@ public class JDAMessageEmbed implements Sendable {
 
     @Override public MessageEmbed[] getMessage() {
         return embeds;
-    }
-
-    @Override public String getId() {
-        return embeds.toString();
     }
 }

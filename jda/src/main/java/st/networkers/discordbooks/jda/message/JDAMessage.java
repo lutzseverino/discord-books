@@ -4,7 +4,7 @@ import net.dv8tion.jda.api.MessageBuilder;
 import net.dv8tion.jda.api.entities.Message;
 import st.networkers.discordbooks.message.Sendable;
 
-public class JDAMessage implements Sendable {
+public class JDAMessage implements Sendable<Message> {
     private final Message message;
 
     public JDAMessage(Message message) {
@@ -17,9 +17,4 @@ public class JDAMessage implements Sendable {
 
     @Override public Message getMessage() {
         return message;
-    }
-
-    @Override public String getId() {
-        return message.toString();
-    }
-}
+    }}

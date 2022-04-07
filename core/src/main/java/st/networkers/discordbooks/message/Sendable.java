@@ -1,8 +1,6 @@
 package st.networkers.discordbooks.message;
 
-public interface Sendable {
+public interface Sendable<T> {
 
-    Object getMessage();
-
-    String getId();
+    T getMessage();
 }
