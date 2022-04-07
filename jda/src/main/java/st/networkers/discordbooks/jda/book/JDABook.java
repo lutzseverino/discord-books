@@ -18,7 +18,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class JDABook extends Book {
-    private Button backButton;
+    private Button previousButton;
     private Button nextButton;
     private final List<Button> buttons = new ArrayList<>();
     private final List<ActionRow> actionRows = new ArrayList<>();
@@ -58,20 +58,20 @@ public class JDABook extends Book {
     }
 
     /**
-     * Sets the book's back button.
+     * Sets the previous button action to the book.
      *
      * @param style the style of the button
      * @param label the label of the button
      * @throws IllegalArgumentException if the style is not a button style other than LINK
      */
-    public void setBackButton(ButtonStyle style, String label) {
+    public void setPreviousButton(ButtonStyle style, String label) {
         if (style != ButtonStyle.LINK)
-            this.backButton = new ButtonImpl(null, label, style, true, null);
+            this.previousButton = new ButtonImpl(null, label, style, true, null);
         else throw new IllegalArgumentException("Back button style must be a button style other than LINK");
     }
 
     /**
-     * Sets the book's next button.
+     * Sets the next button action to the book.
      *
      * @param style the style of the button
      * @param label the label of the button
@@ -111,10 +111,10 @@ public class JDABook extends Book {
      */
     @CheckReturnValue
     private MessageAction applyActionRows(@NotNull MessageAction action, int index) {
-        buttons.add(backButton.withDisabled(index == 0).withId(getName() + "-" + --index));
-        buttons.add(nextButton.withDisabled(index == pages.size() - 1).withId(getName() + "-" + ++index));
+        buttons.add(0, previousButton.withDisabled(index == 0).withId(getName() + "-" + --index));
+        buttons.add(1, nextButton.withDisabled(index == pages.size() - 1).withId(getName() + "-" + ++index));
         ActionRow bookActionRow = ActionRow.of(buttons);
-        actionRows.add(bookActionRow);
+        actionRows.add(0, bookActionRow);
 
         return action.setActionRows(actionRows);
     }
