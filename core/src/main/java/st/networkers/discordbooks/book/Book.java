@@ -22,10 +22,10 @@ public abstract class Book {
     }
 
     /**
-     * @param content the pages' content to add
+     * @param pages the pages to add
      */
-    public void addPages(Sendable @NotNull ... content) {
-        for (Sendable page : content)
+    public void addPages(Sendable<?> @NotNull ... pages) {
+        for (Sendable<?> page : pages)
             this.pages.add(new Page(page));
     }
 
@@ -63,7 +63,7 @@ public abstract class Book {
     }
 
     /**
-     * @return the book's name
+     * @return the name of the book
      */
     public String getName() {
         return name;
@@ -77,19 +77,18 @@ public abstract class Book {
     }
 
     public class Page {
-        private final Sendable content;
+        private final Sendable<?> content;
         private final Book book = Book.this;
-        private final String id;
-
-        public Page(@NotNull Sendable content) {
-            this.content = content;
-            this.id = content.getId();
-        }
+        /**
+         * @param content the content of the page as a {@link Sendable}
+         */
+        public Page(@NotNull Sendable<?> content) {
+            this.content = content;}
 
         /**
          * @return the content of the page
          */
-        public Sendable getContent() {
+        public Sendable<?> getContent() {
             return content;
         }
 
@@ -98,10 +97,6 @@ public abstract class Book {
          */
         public Book getBook() {
             return book;
-        }
-
-        public String getId() {
-            return id;
         }
     }
 }
