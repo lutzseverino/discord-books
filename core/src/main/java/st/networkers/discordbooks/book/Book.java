@@ -1,13 +1,18 @@
 package st.networkers.discordbooks.book;
 
+import org.jetbrains.annotations.NotNull;
 import st.networkers.discordbooks.message.Sendable;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Book {
-    protected String name;
     protected final ArrayList<Page> pages = new ArrayList<>();
+    protected String name;
+
+    public Book(String name) {
+        this.name = name;
+    }
 
     /**
      * @param pages the pages to add
@@ -19,7 +24,7 @@ public abstract class Book {
     /**
      * @param content the pages' content to add
      */
-    public final void addPages(Sendable... content) {
+    public void addPages(Sendable @NotNull ... content) {
         for (Sendable page : content)
             this.pages.add(new Page(page));
     }
@@ -76,7 +81,7 @@ public abstract class Book {
         private final Book book = Book.this;
         private final String id;
 
-        public Page(Sendable content) {
+        public Page(@NotNull Sendable content) {
             this.content = content;
             this.id = content.getId();
         }
