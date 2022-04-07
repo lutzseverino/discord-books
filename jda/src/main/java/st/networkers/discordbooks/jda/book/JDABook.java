@@ -55,35 +55,39 @@ public class JDABook extends Book {
     }
 
     /**
-     * Sets the previous button action to the book.
+     * Gets button that will be used to display
+     * the previous page.
      *
      * @param style the style of the button
      * @param label the label of the button
      * @throws IllegalArgumentException if the style is not a button style other than LINK
      */
-    public void setPreviousButton(ButtonStyle style, String label) {
+    public Button getPreviousButton(ButtonStyle style, String label) {
         if (style != ButtonStyle.LINK)
-            this.previousButton = new ButtonImpl(null, label, style, true, null);
+            this.previousButton = this.previousButton.withStyle(style).withLabel(label);
         else throw new IllegalArgumentException("Back button style must be a button style other than LINK");
+
+        return this.previousButton;
     }
 
     /**
-     * Sets the next button action to the book.
+     * Gets button that will be used to display
+     * the next page.
      *
      * @param style the style of the button
      * @param label the label of the button
      * @throws IllegalArgumentException if the style is not a button style other than LINK
      */
-    public void setNextButton(ButtonStyle style, String label) {
+    public Button getNextButton(ButtonStyle style, String label) {
         if (style != ButtonStyle.LINK)
-            this.nextButton = new ButtonImpl(null, label, style, false, null);
+            this.nextButton = this.nextButton.withStyle(style).withLabel(label);
         else throw new IllegalArgumentException("Next button style must be a button style other than LINK");
+
+        return this.nextButton;
     }
 
     /**
-     * Adds extra desired buttons to the book.
-     * The actions of these will need to be handled
-     * by the user.
+     * Adds buttons to the book.
      *
      * @param buttons the buttons to add
      */
@@ -108,10 +112,10 @@ public class JDABook extends Book {
      */
     @CheckReturnValue
     private @NotNull MessageAction applyActionRows(@NotNull MessageAction action, int index) {
-        buttons.add(0, previousButton.withDisabled(index == 0).withId(getName() + "-" + --index));
-        buttons.add(1, nextButton.withDisabled(index == pages.size() - 1).withId(getName() + "-" + ++index));
-        ActionRow bookActionRow = ActionRow.of(buttons);
-        actionRows.add(0, bookActionRow);
+        previousButton = previousButton.withDisabled(index == 0).withId(getName() + "-" + --index);
+        nextButton = nextButton.withDisabled(index == pages.size() - 1).withId(getName() + "-" + ++index);
+
+        actionRows.add(ActionRow.of(buttons));
 
         return action.setActionRows(actionRows);
     }
