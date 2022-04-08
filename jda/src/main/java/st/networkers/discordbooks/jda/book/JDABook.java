@@ -5,6 +5,7 @@ import net.dv8tion.jda.api.interactions.components.ActionRow;
 import net.dv8tion.jda.api.interactions.components.buttons.Button;
 import net.dv8tion.jda.api.interactions.components.buttons.ButtonStyle;
 import net.dv8tion.jda.api.requests.restaction.MessageAction;
+import net.dv8tion.jda.api.requests.restaction.interactions.MessageEditCallbackAction;
 import net.dv8tion.jda.internal.interactions.component.ButtonImpl;
 import org.jetbrains.annotations.NotNull;
 import st.networkers.discordbooks.book.Book;
@@ -55,6 +56,24 @@ public class JDABook extends Book {
     }
 
     /**
+     * Uses an edit action to edit the current page to
+     * the specified index.
+     *
+     * @param action the action to edit
+     * @param index  the index of the page to edit to
+     */
+    public void edit(MessageEditCallbackAction action, int index) {
+        Sendable<?> sendable = pages.get(index).getContent();
+
+        if (sendable instanceof JDAMessage)
+            applyActionRows(action.setContent(((JDAMessage) sendable).getMessage().getContentRaw()), index).queue();
+        else if (sendable instanceof JDAMessageEmbed)
+            applyActionRows(action.setEmbeds(List.of(((JDAMessageEmbed) sendable).getMessage())), index).queue();
+        else
+            throw new IllegalArgumentException("Sendable of Book page must be a JDAMessage or JDAMessageEmbed");
+    }
+
+    /**
      * Gets button that will be used to display
      * the previous page.
      *
@@ -64,10 +83,10 @@ public class JDABook extends Book {
      */
     public Button getPreviousButton(ButtonStyle style, String label) {
         if (style != ButtonStyle.LINK)
-            this.previousButton = this.previousButton.withStyle(style).withLabel(label);
+            previousButton = previousButton.withStyle(style).withLabel(label);
         else throw new IllegalArgumentException("Back button style must be a button style other than LINK");
 
-        return this.previousButton;
+        return previousButton;
     }
 
     /**
@@ -80,10 +99,10 @@ public class JDABook extends Book {
      */
     public Button getNextButton(ButtonStyle style, String label) {
         if (style != ButtonStyle.LINK)
-            this.nextButton = this.nextButton.withStyle(style).withLabel(label);
+            nextButton = nextButton.withStyle(style).withLabel(label);
         else throw new IllegalArgumentException("Next button style must be a button style other than LINK");
 
-        return this.nextButton;
+        return nextButton;
     }
 
     /**
@@ -106,17 +125,40 @@ public class JDABook extends Book {
 
     /**
      * Applies all the final action rows to the message.
+     * This method can only be used on send.
      *
      * @param action the message action to apply the buttons to
-     * @param index  the index of the page
+     * @param index  the index of the current page
      */
     @CheckReturnValue
     private @NotNull MessageAction applyActionRows(@NotNull MessageAction action, int index) {
+        setActionRowsUp(index);
+        return action.setActionRows(actionRows);
+    }
+
+    /**
+     * Applies all the final action rows to the message.
+     * This method can only be used on edit.
+     *
+     * @param action the message action to apply the buttons to
+     * @param index  the index of the current page
+     */
+    @CheckReturnValue
+    private @NotNull MessageEditCallbackAction applyActionRows(@NotNull MessageEditCallbackAction action, int index) {
+        setActionRowsUp(index);
+        return action.setActionRows(actionRows);
+    }
+
+    /**
+     * Adds the label and disabled state of the buttons
+     * and all additional buttons and action rows.
+     *
+     * @param index the index of the current page
+     */
+    private void setActionRowsUp(int index) {
         previousButton = previousButton.withDisabled(index == 0).withId(getName() + "-" + --index);
         nextButton = nextButton.withDisabled(index == pages.size() - 1).withId(getName() + "-" + ++index);
 
         actionRows.add(ActionRow.of(buttons));
-
-        return action.setActionRows(actionRows);
     }
 }
