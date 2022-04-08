@@ -30,12 +30,13 @@ public class JDABooks extends DiscordBooks {
      * @param channel the channel to send the book to
      * @param index   the index of the page to send
      * @throws IllegalArgumentException if the Book is not a JDABook
+     * @throws IndexOutOfBoundsException if the index is less than 0 or greater than the number of pages
      */
     public void sendBook(String name, MessageChannel channel, int index) {
         Book book = getBooks().get(name);
 
         if (book instanceof JDABook)
             ((JDABook) book).send(channel, index);
-        else throw new IllegalArgumentException("Book is not a JDABook");
+        else throw new IllegalArgumentException("Book must be a JDABook");
     }
 }

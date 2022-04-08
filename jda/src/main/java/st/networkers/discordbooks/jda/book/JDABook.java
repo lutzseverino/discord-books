@@ -42,6 +42,7 @@ public class JDABook extends Book {
      *
      * @param channel the Discord message channel to send the book to
      * @param index   the page number to send
+     * @throws IndexOutOfBoundsException if the index is less than 0 or greater than the number of pages
      */
     public void send(MessageChannel channel, int index) {
         Sendable<?> sendable = pages.get(index).getContent();
