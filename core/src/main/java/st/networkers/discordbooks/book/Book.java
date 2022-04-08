@@ -11,13 +11,13 @@ public abstract class Book {
     protected boolean publicNavigation = false;
     protected String name;
 
-    public Book(String name) {
-        this.name = name;
-    }
-
     public Book(String name, boolean publicNavigation) {
         this.name = name;
         this.publicNavigation = publicNavigation;
+    }
+
+    public Book(String name) {
+        this.name = name;
     }
 
     /**
