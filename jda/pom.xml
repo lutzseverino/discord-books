@@ -4,12 +4,13 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>discord-books</artifactId>
-        <groupId>st.networkers.discord-books</groupId>
+        <groupId>st.networkers.discordbooks</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>st.networkers.discord-books.jda</groupId>
+    <packaging>jar</packaging>
+
     <artifactId>discord-books-jda</artifactId>
 
     <properties>
@@ -19,20 +20,20 @@
 
     <dependencies>
         <dependency>
-            <groupId>st.networkers.discord-books</groupId>
+            <groupId>st.networkers.discordbooks</groupId>
             <artifactId>discord-books-core</artifactId>
             <version>1.0-SNAPSHOT</version>
-            <scope>build</scope>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>net.dv8tion</groupId>
             <artifactId>JDA</artifactId>
-            <scope>build</scope>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>com.google.code.findbugs</groupId>
             <artifactId>jsr305</artifactId>
-            <scope>build</scope>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.jetbrains</groupId>
