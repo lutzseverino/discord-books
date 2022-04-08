@@ -6,12 +6,12 @@ import org.jetbrains.annotations.NotNull;
 import st.networkers.discordbooks.DiscordBooks;
 import st.networkers.discordbooks.book.Book;
 import st.networkers.discordbooks.jda.book.JDABook;
-import st.networkers.discordbooks.jda.listeners.ButtonListener;
+import st.networkers.discordbooks.jda.listener.ButtonListener;
 
 public class JDABooks extends DiscordBooks {
 
     public JDABooks(@NotNull JDA jdaInstance) {
-        jdaInstance.addEventListener(new ButtonListener(getBooks(), getAllPages()));
+        jdaInstance.addEventListener(new ButtonListener(getBooks()));
     }
 
     public JDABooks() {

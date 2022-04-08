@@ -1,9 +1,11 @@
 package st.networkers.discordbooks.cache;
 
+import org.jetbrains.annotations.Nullable;
+
 public interface Cache<T> {
     void add(T t);
 
-    T get(String id);
+    @Nullable T get(String id);
 
     Iterable<T> getAll();
 
