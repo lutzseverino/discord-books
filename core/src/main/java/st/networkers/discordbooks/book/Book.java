@@ -37,6 +37,14 @@ public abstract class Book {
     }
 
     /**
+     * @param index the index of the page
+     * @return the page at the index
+     */
+    public Book.Page getPage(int index) {
+        return pages.get(index);
+    }
+
+    /**
      * Uses the provided page as the index, then adds
      * one and returns the result.
      *
@@ -79,11 +87,13 @@ public abstract class Book {
     public class Page {
         private final Sendable<?> content;
         private final Book book = Book.this;
+
         /**
          * @param content the content of the page as a {@link Sendable}
          */
         public Page(@NotNull Sendable<?> content) {
-            this.content = content;}
+            this.content = content;
+        }
 
         /**
          * @return the content of the page
