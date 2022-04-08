@@ -8,10 +8,16 @@ import java.util.List;
 
 public abstract class Book {
     protected final ArrayList<Page> pages = new ArrayList<>();
+    protected boolean publicNavigation = false;
     protected String name;
 
     public Book(String name) {
         this.name = name;
+    }
+
+    public Book(String name, boolean publicNavigation) {
+        this.name = name;
+        this.publicNavigation = publicNavigation;
     }
 
     /**
@@ -82,6 +88,13 @@ public abstract class Book {
      */
     public void setName(String name) {
         this.name = name;
+    }
+
+    /**
+     * @return if the navigation of the book is public
+     */
+    public boolean isNavigationPublic() {
+        return publicNavigation;
     }
 
     public class Page {
