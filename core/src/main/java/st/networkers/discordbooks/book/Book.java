@@ -8,7 +8,7 @@ import java.util.List;
 
 public abstract class Book {
     protected final ArrayList<Page> pages = new ArrayList<>();
-    protected boolean publicNavigation = false;
+    protected boolean publicNavigation;
     protected String name;
 
     public Book(String name, boolean publicNavigation) {
@@ -17,7 +17,7 @@ public abstract class Book {
     }
 
     public Book(String name) {
-        this.name = name;
+        this(name, false);
     }
 
     /**
