@@ -39,7 +39,7 @@ public class ButtonListener extends ListenerAdapter {
             Interaction interaction = message.getInteraction();
 
             if (book != null) {
-                if (interaction != null && interaction.getUser() == event.getUser() && !book.isNavigationPublic()) {
+                if (interaction != null && interaction.getUser().equals(event.getUser()) && !book.isNavigationPublic()) {
                     errorHandler.whenBookIsNull(event);
                     return;
                 }
