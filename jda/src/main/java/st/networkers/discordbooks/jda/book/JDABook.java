@@ -16,15 +16,20 @@ import st.networkers.discordbooks.message.Sendable;
 import javax.annotation.CheckReturnValue;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.UnaryOperator;
 
 public class JDABook extends Book {
-    private Button previousButton = new ButtonImpl(null, "Previous", ButtonStyle.PRIMARY, true, null);
-    private Button nextButton = new ButtonImpl(null, "Next", ButtonStyle.PRIMARY, true, null);
     private final List<Button> buttons = new ArrayList<>();
     private final List<ActionRow> actionRows = new ArrayList<>();
+    private Button previousButton = new ButtonImpl(null, "Previous", ButtonStyle.PRIMARY, true, null);
+    private Button nextButton = new ButtonImpl(null, "Next", ButtonStyle.PRIMARY, true, null);
+
+    public JDABook(String name, boolean publicNavigation) {
+        super(name, publicNavigation);
+    }
 
     public JDABook(String name) {
-        super(name);
+        this(name, false);
     }
 
     /**
@@ -75,35 +80,31 @@ public class JDABook extends Book {
     }
 
     /**
-     * Gets button that will be used to display
-     * the previous page.
-     *
-     * @param style the style of the button
-     * @param label the label of the button
-     * @throws IllegalArgumentException if the style is not a button style other than LINK
+     * @return the button used to navigate to the previous page
      */
-    public Button getPreviousButton(ButtonStyle style, String label) {
-        if (style != ButtonStyle.LINK)
-            previousButton = previousButton.withStyle(style).withLabel(label);
-        else throw new IllegalArgumentException("Back button style must be a button style other than LINK");
-
+    public Button getPreviousButton() {
         return previousButton;
     }
 
     /**
-     * Gets button that will be used to display
-     * the next page.
-     *
-     * @param style the style of the button
-     * @param label the label of the button
-     * @throws IllegalArgumentException if the style is not a button style other than LINK
+     * @return the button used to navigate to the next page
      */
-    public Button getNextButton(ButtonStyle style, String label) {
-        if (style != ButtonStyle.LINK)
-            nextButton = nextButton.withStyle(style).withLabel(label);
-        else throw new IllegalArgumentException("Next button style must be a button style other than LINK");
-
+    public Button getNextButton() {
         return nextButton;
+    }
+
+    /**
+     * @param previousButtonAppearance the operator used to set the button to navigate to the previous page
+     */
+    public void setPreviousButtonLook(@NotNull UnaryOperator<Button> previousButtonAppearance) {
+        this.previousButton = previousButtonAppearance.apply(previousButton);
+    }
+
+    /**
+     * @param nextButtonAppearance the operator used to set the button to navigate to the previous page
+     */
+    public void setNextButtonLook(@NotNull UnaryOperator<Button> nextButtonAppearance) {
+        this.nextButton = nextButtonAppearance.apply(nextButton);
     }
 
     /**
@@ -157,8 +158,15 @@ public class JDABook extends Book {
      * @param index the index of the current page
      */
     private void setActionRowsUp(int index) {
-        previousButton = previousButton.withDisabled(index == 0).withId(getName() + "-" + --index);
-        nextButton = nextButton.withDisabled(index == pages.size() - 1).withId(getName() + "-" + ++index);
+        for (int i = 0; i < buttons.size(); i++) {
+            if (buttons.get(i).equals(previousButton)) {
+                previousButton = buttons.remove(i).withDisabled(index == 0).withId(getName() + "-" + --index);
+                buttons.add(i, previousButton);
+            } else if (buttons.get(i).equals(nextButton)) {
+                nextButton = buttons.remove(i).withDisabled(index == pages.size() - 1).withId(getName() + "-" + ++index);
+                buttons.add(i, nextButton);
+            }
+        }
 
         actionRows.add(ActionRow.of(buttons));
     }
