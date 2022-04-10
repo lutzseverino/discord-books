@@ -6,10 +6,18 @@ A lightweight and implementable library that helps you create multi-page message
 
 ## Summary
 
-* Installation
-    * Spins
-* Features
-* Usage
+* [Installation](#installation)
+    * [Spins](#spins)
+* [Features](#features)
+* [Usage](#usage)
+    * [Creating the book](#creating-the-book)
+    * [Adding pages](#adding-pages)
+    * [Customizing buttons](#customizing-buttons)
+    * [Adding component rows](#adding-component-rows)
+    * [Specifying the owner](#specifying-the-owner)
+    * [Adding the books](#adding-the-books)
+    * [Listening to the button event](#listening-to-the-button-event)
+    * [Handling errors](#handling-errors)
 
 ## Installation
 
@@ -115,7 +123,7 @@ public class Example extends JDABook {
 }
 ```
 
-### Adding action rows
+### Adding component rows
 
 Additional button rows may be added via the `#addActionRows()` method.
 
