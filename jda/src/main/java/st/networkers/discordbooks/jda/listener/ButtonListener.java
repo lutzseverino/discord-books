@@ -30,7 +30,7 @@ public class ButtonListener extends ListenerAdapter {
             String id = event.getButton().getId();
 
             //noinspection ConstantConditions
-            String[] split = id.split("-");
+            String[] split = id.split("@");
             String bookId = split[0];
             int pageToSet = Integer.parseInt(split[1]);
             JDABook book = (JDABook) books.get(bookId);
