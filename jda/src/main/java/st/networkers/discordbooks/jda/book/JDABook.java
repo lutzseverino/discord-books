@@ -15,14 +15,15 @@ import st.networkers.discordbooks.message.Sendable;
 
 import javax.annotation.CheckReturnValue;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.function.UnaryOperator;
 
 public class JDABook extends Book {
     private final List<Button> buttons = new ArrayList<>();
     private final List<ActionRow> actionRows = new ArrayList<>();
-    private Button previousButton = new ButtonImpl(null, "Previous", ButtonStyle.PRIMARY, true, null);
-    private Button nextButton = new ButtonImpl(null, "Next", ButtonStyle.PRIMARY, true, null);
+    private Button previousButton = new ButtonImpl(null, null, ButtonStyle.PRIMARY, true, null);
+    private Button nextButton = new ButtonImpl(null, null, ButtonStyle.PRIMARY, true, null);
 
     public JDABook(String name, boolean publicNavigation) {
         super(name, publicNavigation);
@@ -59,6 +60,8 @@ public class JDABook extends Book {
             applyActionRows(channel.sendMessageEmbeds(List.of(((JDAMessageEmbed) sendable).getMessage())), index).queue();
         else
             throw new IllegalArgumentException("Sendable of Book page must be a JDAMessage or JDAMessageEmbed");
+
+        actionRows.remove(0);
     }
 
     /**
@@ -72,11 +75,13 @@ public class JDABook extends Book {
         Sendable<?> sendable = pages.get(index).getContent();
 
         if (sendable instanceof JDAMessage)
-            applyActionRows(action.setContent(((JDAMessage) sendable).getMessage().getContentRaw()), index).queue();
+            applyActionRows(action.setContent(((JDAMessage) sendable).getMessage().getContentRaw()).setEmbeds(Collections.emptyList()), index).queue();
         else if (sendable instanceof JDAMessageEmbed)
-            applyActionRows(action.setEmbeds(List.of(((JDAMessageEmbed) sendable).getMessage())), index).queue();
+            applyActionRows(action.setEmbeds(List.of(((JDAMessageEmbed) sendable).getMessage())).setContent(null), index).queue();
         else
             throw new IllegalArgumentException("Sendable of Book page must be a JDAMessage or JDAMessageEmbed");
+
+        actionRows.remove(0);
     }
 
     /**
@@ -96,14 +101,14 @@ public class JDABook extends Book {
     /**
      * @param previousButtonAppearance the operator used to set the button to navigate to the previous page
      */
-    public void setPreviousButtonLook(@NotNull UnaryOperator<Button> previousButtonAppearance) {
+    public void setPreviousButtonAppearance(@NotNull UnaryOperator<Button> previousButtonAppearance) {
         this.previousButton = previousButtonAppearance.apply(previousButton);
     }
 
     /**
      * @param nextButtonAppearance the operator used to set the button to navigate to the previous page
      */
-    public void setNextButtonLook(@NotNull UnaryOperator<Button> nextButtonAppearance) {
+    public void setNextButtonAppearance(@NotNull UnaryOperator<Button> nextButtonAppearance) {
         this.nextButton = nextButtonAppearance.apply(nextButton);
     }
 
@@ -160,14 +165,14 @@ public class JDABook extends Book {
     private void setActionRowsUp(int index) {
         for (int i = 0; i < buttons.size(); i++) {
             if (buttons.get(i).equals(previousButton)) {
-                previousButton = buttons.remove(i).withDisabled(index == 0).withId(getName() + "-" + --index);
+                previousButton = buttons.remove(i).withDisabled(index == 0).withId(getName() + "@" + (index - 1));
                 buttons.add(i, previousButton);
             } else if (buttons.get(i).equals(nextButton)) {
-                nextButton = buttons.remove(i).withDisabled(index == pages.size() - 1).withId(getName() + "-" + ++index);
+                nextButton = buttons.remove(i).withDisabled(index == pages.size() - 1).withId(getName() + "@" + (index + 1));
                 buttons.add(i, nextButton);
             }
         }
 
-        actionRows.add(ActionRow.of(buttons));
+        actionRows.add(0, ActionRow.of(buttons));
     }
 }
