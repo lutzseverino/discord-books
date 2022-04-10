@@ -1,5 +1,7 @@
 ![java](https://img.shields.io/badge/java-%23ED8B00.svg?style=flat&logo=java&logoColor=white) ![total lines](https://img.shields.io/tokei/lines/github/frequential/discord-books) ![license](https://img.shields.io/github/license/frequential/discord-books)
 
+<img align="right" src="https://user-images.githubusercontent.com/28309837/162641093-c8648d57-5afb-4b91-8a38-82b1473cc6d4.gif" height="500">
+
 # Discord Books
 
 A lightweight and implementable library that helps you create multi-page messages automatically on Discord.
