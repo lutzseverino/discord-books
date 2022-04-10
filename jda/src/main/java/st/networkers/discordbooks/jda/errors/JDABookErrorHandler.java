@@ -6,5 +6,5 @@ public interface JDABookErrorHandler {
 
     void whenBookIsNull(ButtonInteractionEvent event);
 
-    void whenUserIsNotAuthor(ButtonInteractionEvent event);
+    void whenUserIsNotOwner(ButtonInteractionEvent event);
 }

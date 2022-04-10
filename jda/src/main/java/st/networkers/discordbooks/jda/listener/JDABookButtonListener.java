@@ -12,16 +12,16 @@ import st.networkers.discordbooks.jda.book.JDABook;
 import st.networkers.discordbooks.jda.errors.JDABookErrorHandler;
 import st.networkers.discordbooks.jda.errors.JDABookErrorHandlerImpl;
 
-public class ButtonListener extends ListenerAdapter {
+public class JDABookButtonListener extends ListenerAdapter {
     private final Cache<? extends Book> books;
     private final JDABookErrorHandler errorHandler;
 
-    public ButtonListener(Cache<? extends Book> books, JDABookErrorHandler errorHandler) {
+    public JDABookButtonListener(Cache<? extends Book> books, JDABookErrorHandler errorHandler) {
         this.books = books;
         this.errorHandler = errorHandler;
     }
 
-    public ButtonListener(Cache<? extends Book> books) {
+    public JDABookButtonListener(Cache<? extends Book> books) {
         this(books, new JDABookErrorHandlerImpl());
     }
 
@@ -31,20 +31,21 @@ public class ButtonListener extends ListenerAdapter {
 
             //noinspection ConstantConditions
             String[] split = id.split("@");
-            String bookId = split[0];
+            String bookID = split[0];
             int pageToSet = Integer.parseInt(split[1]);
-            JDABook book = (JDABook) books.get(bookId);
+            String ownerID = split[2];
+            JDABook book = (JDABook) books.get(bookID);
 
             Message message = event.getMessage();
             Interaction interaction = message.getInteraction();
 
             if (book != null) {
-                if (interaction != null && interaction.getUser().equals(event.getUser()) && !book.isNavigationPublic()) {
-                    errorHandler.whenBookIsNull(event);
+                if (((interaction != null && !interaction.getUser().equals(event.getUser())) || (!event.getUser().getId().equals(ownerID))) && !book.isNavigationPublic()) {
+                    errorHandler.whenUserIsNotOwner(event);
                     return;
                 }
 
-                book.edit(event.deferEdit(), pageToSet);
+                book.edit(event.deferEdit(), pageToSet, ownerID);
             } else errorHandler.whenBookIsNull(event);
         }
     }

@@ -7,7 +7,7 @@ public class JDABookErrorHandlerImpl implements JDABookErrorHandler {
         event.reply("Book not found, it may no longer exist in the codebase.").queue();
     }
 
-    public void whenUserIsNotAuthor(ButtonInteractionEvent event) {
+    public void whenUserIsNotOwner(ButtonInteractionEvent event) {
         event.reply("You are not the author of this book.").queue();
     }
 }
