@@ -39,7 +39,7 @@ the [GitHub Packages](https://github.com/frequential?tab=packages&repo_name=disc
 * Add extra component rows.
 * Handle errors easily.
 
-# Usage
+## Usage
 
 Each spin has its own Book extension, to create a book, you'll need to create a class that extends the appropriate Book
 subclass.
