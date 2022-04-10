@@ -137,7 +137,7 @@ public class JDABook extends Book {
     }
 
     /**
-     * Adds buttons to the book.
+     * Adds buttons to the first action row of the book.
      *
      * @param buttons the buttons to add
      */
@@ -183,7 +183,7 @@ public class JDABook extends Book {
     }
 
     /**
-     * Adds the label and disabled state of the buttons
+     * Adds the ID and disabled state of the buttons
      * and all additional buttons and action rows.
      *
      * @param index the index of the current page
