@@ -57,31 +57,31 @@ public class JDABook extends Book {
 
     /**
      * Sends the first book page to a specified
-     * channel and assigns an owner.
+     * channel and assigns owners.
      *
      * @param channel the Discord message channel to send the book to
-     * @param ownerID the ID of the user who owns the book
+     * @param ownerIDs the IDs of the users who own the book
      */
-    public void send(MessageChannel channel, String ownerID) {
-        send(channel, 0, ownerID);
+    public void send(MessageChannel channel, String... ownerIDs) {
+        send(channel, 0, ownerIDs);
     }
 
     /**
      * Sends the specified book page to the provided
-     * channel and assigns an owner.
+     * channel and assigns owners.
      *
      * @param channel the Discord message channel to send the book to
      * @param index   the page number to send
-     * @param ownerID the ID of the user who owns the book
+     * @param ownerIDs the IDs of the users who own the book
      * @throws IndexOutOfBoundsException if the index is less than 0 or greater than the number of pages
      */
-    public void send(MessageChannel channel, int index, String ownerID) {
+    public void send(MessageChannel channel, int index, String... ownerIDs) {
         Sendable<?> sendable = pages.get(index).getContent();
 
         if (sendable instanceof JDAMessage)
-            applyActionRows(channel.sendMessage(((JDAMessage) sendable).getMessage()), index, ownerID).queue();
+            applyActionRows(channel.sendMessage(((JDAMessage) sendable).getMessage()), index, ownerIDs).queue();
         else if (sendable instanceof JDAMessageEmbed)
-            applyActionRows(channel.sendMessageEmbeds(List.of(((JDAMessageEmbed) sendable).getMessage())), index, ownerID).queue();
+            applyActionRows(channel.sendMessageEmbeds(List.of(((JDAMessageEmbed) sendable).getMessage())), index, ownerIDs).queue();
         else
             throw new IllegalArgumentException("Sendable of Book page must be a JDAMessage or JDAMessageEmbed");
 
@@ -94,14 +94,15 @@ public class JDABook extends Book {
      *
      * @param action the action to edit
      * @param index  the index of the page to edit to
+     * @param ownerIDs the IDs of the users who own the book
      */
-    public void edit(MessageEditCallbackAction action, int index, String ownerID) {
+    public void edit(MessageEditCallbackAction action, int index, String... ownerIDs) {
         Sendable<?> sendable = pages.get(index).getContent();
 
         if (sendable instanceof JDAMessage)
-            applyActionRows(action.setContent(((JDAMessage) sendable).getMessage().getContentRaw()).setEmbeds(Collections.emptyList()), index, ownerID).queue();
+            applyActionRows(action.setContent(((JDAMessage) sendable).getMessage().getContentRaw()).setEmbeds(Collections.emptyList()), index, ownerIDs).queue();
         else if (sendable instanceof JDAMessageEmbed)
-            applyActionRows(action.setEmbeds(List.of(((JDAMessageEmbed) sendable).getMessage())).setContent(null), index, ownerID).queue();
+            applyActionRows(action.setEmbeds(List.of(((JDAMessageEmbed) sendable).getMessage())).setContent(null), index, ownerIDs).queue();
         else
             throw new IllegalArgumentException("Sendable of Book page must be a JDAMessage or JDAMessageEmbed");
 
@@ -160,11 +161,11 @@ public class JDABook extends Book {
      *
      * @param action the message action to apply the buttons to
      * @param index  the index of the current page
-     * @param ownerID the owner of the book
+     * @param ownerIDs the IDs of the users who own the book
      */
     @CheckReturnValue
-    private @NotNull MessageAction applyActionRows(@NotNull MessageAction action, int index, String ownerID) {
-        setActionRowsUp(index, ownerID);
+    private @NotNull MessageAction applyActionRows(@NotNull MessageAction action, int index, String... ownerIDs) {
+        setActionRowsUp(index, ownerIDs);
         return action.setActionRows(actionRows);
     }
 
@@ -174,11 +175,11 @@ public class JDABook extends Book {
      *
      * @param action the message action to apply the buttons to
      * @param index  the index of the current page
-     * @param ownerID the owner of the book
+     * @param ownerIDs the IDs of the users who own the book
      */
     @CheckReturnValue
-    private @NotNull MessageEditCallbackAction applyActionRows(@NotNull MessageEditCallbackAction action, int index , String ownerID) {
-        setActionRowsUp(index, ownerID);
+    private @NotNull MessageEditCallbackAction applyActionRows(@NotNull MessageEditCallbackAction action, int index , String... ownerIDs) {
+        setActionRowsUp(index, ownerIDs);
         return action.setActionRows(actionRows);
     }
 
@@ -187,15 +188,15 @@ public class JDABook extends Book {
      * and all additional buttons and action rows.
      *
      * @param index the index of the current page
-     * @param ownerID the owner of the book
+     * @param ownerIDs the IDs of the users who own the book
      */
-    private void setActionRowsUp(int index, String ownerID) {
+    private void setActionRowsUp(int index, String... ownerIDs) {
         for (int i = 0; i < buttons.size(); i++) {
             if (buttons.get(i).equals(previousButton)) {
-                previousButton = buttons.remove(i).withDisabled(index == 0).withId(getName() + "@" + (index - 1) + "@" + ownerID);
+                previousButton = buttons.remove(i).withDisabled(index == 0).withId(getName() + "@" + (index - 1) + "@" + String.join("#", ownerIDs));
                 buttons.add(i, previousButton);
             } else if (buttons.get(i).equals(nextButton)) {
-                nextButton = buttons.remove(i).withDisabled(index == pages.size() - 1).withId(getName() + "@" + (index + 1) + "@" + ownerID);
+                nextButton = buttons.remove(i).withDisabled(index == pages.size() - 1).withId(getName() + "@" + (index + 1) + "@" + String.join("#", ownerIDs));
                 buttons.add(i, nextButton);
             }
         }
