@@ -16,7 +16,7 @@ A lightweight and implementable library that helps you create multi-page message
     * [Adding pages](#adding-pages)
     * [Customizing buttons](#customizing-buttons)
     * [Adding component rows](#adding-component-rows)
-    * [Specifying the owner](#specifying-the-owner)
+    * [Specifying the owners](#specifying-the-owners)
     * [Adding the books](#adding-the-books)
     * [Listening to the button event](#listening-to-the-button-event)
     * [Handling errors](#handling-errors)
@@ -165,12 +165,9 @@ public class Example extends JDABook {
 }
 ```
 
-### Specifying the owner
+### Specifying the owners
 
-The owner of the book **may not be specified** if your bot is using slash command interactions, if so, the user that
-fired the interaction will automatically be the owner of the book.
-
-Otherwise, the owner needs to be specified at send time.
+The owners of the books may be specified at send time using the `#send()` method. 
 
 ### Adding the books
 
