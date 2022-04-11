@@ -1,7 +1,5 @@
 package st.networkers.discordbooks.jda.listener;
 
-import net.dv8tion.jda.api.entities.Message;
-import net.dv8tion.jda.api.entities.Message.Interaction;
 import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.interactions.components.buttons.ButtonStyle;
@@ -11,6 +9,8 @@ import st.networkers.discordbooks.cache.Cache;
 import st.networkers.discordbooks.jda.book.JDABook;
 import st.networkers.discordbooks.jda.errors.JDABookErrorHandler;
 import st.networkers.discordbooks.jda.errors.JDABookErrorHandlerImpl;
+
+import java.util.Arrays;
 
 public class JDABookButtonListener extends ListenerAdapter {
     private final Cache<? extends Book> books;
@@ -33,19 +33,16 @@ public class JDABookButtonListener extends ListenerAdapter {
             String[] split = id.split("@");
             String bookID = split[0];
             int pageToSet = Integer.parseInt(split[1]);
-            String ownerID = split[2];
+            String[] ownerIDs = split[2].split("#");
             JDABook book = (JDABook) books.get(bookID);
 
-            Message message = event.getMessage();
-            Interaction interaction = message.getInteraction();
-
             if (book != null) {
-                if (((interaction != null && !interaction.getUser().equals(event.getUser())) || (!event.getUser().getId().equals(ownerID))) && !book.isNavigationPublic()) {
+                if (!book.isNavigationPublic() && Arrays.stream(ownerIDs).noneMatch(s -> event.getUser().getId().equals(s)))  {
                     errorHandler.whenUserIsNotOwner(event);
                     return;
                 }
 
-                book.edit(event.deferEdit(), pageToSet, ownerID);
+                book.edit(event.deferEdit(), pageToSet, ownerIDs);
             } else errorHandler.whenBookIsNull(event);
         }
     }
