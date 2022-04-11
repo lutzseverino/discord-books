@@ -1,6 +1,6 @@
 ![java](https://img.shields.io/badge/java-%23ED8B00.svg?style=flat&logo=java&logoColor=white) ![total lines](https://img.shields.io/tokei/lines/github/frequential/discord-books) ![license](https://img.shields.io/github/license/frequential/discord-books)
 
-<img align="right" src="https://user-images.githubusercontent.com/28309837/162641093-c8648d57-5afb-4b91-8a38-82b1473cc6d4.gif" height="500">
+<img alt="discord-books library showcase" align="right" src="https://user-images.githubusercontent.com/28309837/162641093-c8648d57-5afb-4b91-8a38-82b1473cc6d4.gif" height="450">
 
 # Discord Books
 
@@ -212,3 +212,6 @@ public class JDABookErrorHandlerImpl implements JDABookErrorHandler {
 ```
 
 Once that's done, you'll need to pass an instance of your implementation to the listener that we registered in the previous step.
+
+## Credits
+Idea and execution by [Jasper Lutz Severino](https://github.com/frequential). General audit and help by [Alberto Mimbrero](https://github.com/mimbrero). 
