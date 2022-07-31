@@ -30,8 +30,8 @@ public abstract class Book {
     /**
      * @param pages the pages to add
      */
-    public void addPages(Sendable<?> @NotNull ... pages) {
-        for (Sendable<?> page : pages)
+    public void addPages(Sendable @NotNull ... pages) {
+        for (Sendable page : pages)
             this.pages.add(new Page(page));
     }
 
@@ -98,20 +98,20 @@ public abstract class Book {
     }
 
     public class Page {
-        private final Sendable<?> content;
+        private final Sendable content;
         private final Book book = Book.this;
 
         /**
          * @param content the content of the page as a {@link Sendable}
          */
-        public Page(@NotNull Sendable<?> content) {
+        public Page(@NotNull Sendable content) {
             this.content = content;
         }
 
         /**
          * @return the content of the page
          */
-        public Sendable<?> getContent() {
+        public Sendable getContent() {
             return content;
         }
 

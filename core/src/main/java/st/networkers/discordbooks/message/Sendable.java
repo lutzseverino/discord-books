@@ -1,6 +1,14 @@
 package st.networkers.discordbooks.message;
 
-public interface Sendable<T> {
+import java.util.List;
+import java.util.Optional;
 
-    T getMessage();
+public interface Sendable {
+
+    Optional<String> getText();
+
+    Sendable setEmbeds(Embed... embeds);
+
+    List<Embed> getEmbeds();
+
 }
