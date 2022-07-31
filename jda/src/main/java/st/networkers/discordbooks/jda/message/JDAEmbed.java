@@ -77,7 +77,7 @@ public class JDAEmbed implements Embed {
         return embed.getFields().stream().map(JDAField::new).collect(Collectors.toList());
     }
 
-    class JDAAuthor implements Embed.Author {
+    public static class JDAAuthor implements Embed.Author {
         private final String name;
         private final String url;
         private final String iconUrl;
@@ -105,7 +105,7 @@ public class JDAEmbed implements Embed {
         }
     }
 
-    class JDAField implements Embed.Field {
+    public static class JDAField implements Embed.Field {
         private final String name;
         private final String value;
         private final boolean inline;
