@@ -4,7 +4,7 @@
 
 # Discord Books
 
-A lightweight and implementable library that helps you create multi-page messages automatically on Discord.
+A lightweight and implementable library that helps you create multipage messages automatically on Discord.
 
 ## Summary
 
@@ -29,13 +29,14 @@ Add the following to your `pom.xml` file:
 ```xml
 
 <dependency>
-    <groupId>st.networkers.discordbooks</groupId>
+    <groupId>com.lutzseverino.discordbooks</groupId>
     <artifactId>discord-books-SPIN</artifactId>
-    <version>1.0.0</version>
+    <version>VERSION</version>
 </dependency> 
 ```
 
-Replace `-SPIN` with the appropriate version you're looking for. Remove it if you want every module.
+Replace `SPIN` with the appropriate version you're looking for, and `VERSION` with the version you're looking for. Refer
+to the Releases tab to see the latest versions.
 
 ### Spins
 
