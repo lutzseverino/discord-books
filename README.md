@@ -1,4 +1,4 @@
-![java](https://img.shields.io/badge/java-%23ED8B00.svg?style=flat&logo=java&logoColor=white) ![total lines](https://img.shields.io/tokei/lines/github/frequential/discord-books) ![license](https://img.shields.io/github/license/frequential/discord-books)
+![java](https://img.shields.io/badge/java-%23ED8B00.svg?style=flat&logo=java&logoColor=white) ![total lines](https://img.shields.io/tokei/lines/github/lutzseverino/discord-books) ![license](https://img.shields.io/github/license/lutzseverino/discord-books)
 
 <img alt="discord-books library showcase" align="right" src="https://user-images.githubusercontent.com/28309837/182421595-664c25ab-b3c5-4843-858a-a248d71a9896.gif" height="450">
 
@@ -41,7 +41,7 @@ to the Releases tab to see the latest versions.
 ### Spins
 
 You can check all available spins on
-the [GitHub Packages](https://github.com/frequential?tab=packages&repo_name=discord-books) tab.
+the [GitHub Packages](https://github.com/lutzseverino?tab=packages&repo_name=discord-books) tab.
 
 ## Features
 
@@ -270,6 +270,6 @@ previous step.
 
 ## Credits
 
-**All versions**: Idea and execution by [Jasper Lutz Severino](https://github.com/frequential).
+**All versions**: Idea and execution by [Jasper Lutz Severino](https://github.com/lutzseverino).
 \
 **Up to 1.0.0**: General audit and help by [Alberto Mimbrero](https://github.com/mimbrero). 

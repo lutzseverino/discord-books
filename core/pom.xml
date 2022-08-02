@@ -11,6 +11,7 @@
 
     <packaging>jar</packaging>
 
+    <name>Discord Books Core</name>
     <artifactId>discord-books-core</artifactId>
 
     <properties>
@@ -25,12 +26,4 @@
             <scope>provided</scope>
         </dependency>
     </dependencies>
-
-    <distributionManagement>
-        <repository>
-            <id>github</id>
-            <name>GitHub frequential Apache Maven Packages</name>
-            <url>https://maven.pkg.github.com/frequential/discord-books</url>
-        </repository>
-    </distributionManagement>
 </project>
