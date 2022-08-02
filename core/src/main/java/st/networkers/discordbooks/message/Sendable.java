@@ -1,58 +1,17 @@
 package st.networkers.discordbooks.message;
 
+import st.networkers.discordbooks.component.ActionableRow;
+
 import java.util.List;
-import java.util.Optional;
 
 public interface Sendable {
 
-    Optional<String> getText();
+    String getText();
 
     List<Embed> getEmbeds();
 
-    List<List<Actionable>> getActionables();
+    List<ActionableRow> getActionableRows();
 
-    interface Actionable {
-
-        Optional<String> getId();
-
-        boolean isDisabled();
-
-        interface Clickable {
-
-            Style getStyle();
-
-            String getDisplay();
-
-            Optional<String> getUrl();
-
-            Optional<String> getEmoji();
-
-            enum Style {
-                PRIMARY,
-                SECONDARY,
-                SUCCESS,
-                DANGER,
-                LINK,
-                UNKNOWN,
-            }
-        }
-
-        interface Selectable {
-
-            List<Selectable.Option> getOptions();
-
-            interface Option {
-                String getDisplay();
-
-                String getValue();
-
-                String getDescription();
-
-                boolean isDefault();
-
-                Optional<String> getEmoji();
-            }
-        }
-    }
+    Sendable setActionableRows(List<ActionableRow> actionableRows);
 
 }
