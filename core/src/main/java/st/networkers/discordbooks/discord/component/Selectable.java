@@ -14,6 +14,8 @@ public interface Selectable extends Actionable {
 
     Selectable setOptions(List<Option> options);
 
+    Selectable addOptions(Option... options);
+
     interface Option {
         String getDisplay();
 
