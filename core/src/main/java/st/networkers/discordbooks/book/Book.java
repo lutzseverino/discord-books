@@ -15,17 +15,11 @@ public abstract class Book {
     private final List<Sendable> pages = new ArrayList<>();
     private final List<ActionableRow> actionableRows = new ArrayList<>();
     private final List<Clickable> clickables = new ArrayList<>();
-    private boolean publicNavigation;
     private Clickable previousClickable;
     private Clickable nextClickable;
 
-    public Book(String name, boolean publicNavigation) {
-        this.name = name;
-        this.publicNavigation = publicNavigation;
-    }
-
     public Book(String name) {
-        this(name, false);
+        this.name = name;
     }
 
     /**
@@ -33,25 +27,6 @@ public abstract class Book {
      */
     public String getName() {
         return name;
-    }
-
-    /**
-     * @return if the navigation of the book is public
-     */
-    public boolean isNavigationPublic() {
-        return publicNavigation;
-    }
-
-    /**
-     * Specifies if the book's navigation should be public or not. If not,
-     * only the specified owners of the book will be able to navigate the book.
-     * <p>
-     * If no owners are specified, the book will automatically be public.
-     *
-     * @param publicNavigation if the book can be navigated by the public
-     */
-    public void setPublicNavigation(boolean publicNavigation) {
-        this.publicNavigation = publicNavigation;
     }
 
     /**
