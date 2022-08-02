@@ -1,6 +1,6 @@
 ![java](https://img.shields.io/badge/java-%23ED8B00.svg?style=flat&logo=java&logoColor=white) ![total lines](https://img.shields.io/tokei/lines/github/frequential/discord-books) ![license](https://img.shields.io/github/license/frequential/discord-books)
 
-<img alt="discord-books library showcase" align="right" src="https://user-images.githubusercontent.com/28309837/162641093-c8648d57-5afb-4b91-8a38-82b1473cc6d4.gif" height="450">
+<img alt="discord-books library showcase" align="right" src="https://user-images.githubusercontent.com/28309837/182421595-664c25ab-b3c5-4843-858a-a248d71a9896.gif" height="450">
 
 # Discord Books
 
