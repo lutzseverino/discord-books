@@ -11,13 +11,23 @@ public class SelectableImpl implements Selectable {
     private List<Option> options;
     private boolean disabled;
 
+    public SelectableImpl(String id, List<Option> options) {
+        this.id = id;
+        this.options = options;
+    }
+
+    public SelectableImpl(String id, Option... options) {
+        this.id = id;
+        this.options = List.of(options);
+    }
+
     public SelectableImpl(@NotNull Selectable selectable) {
         this.id = selectable.getId();
         this.options = selectable.getOptions();
         this.disabled = selectable.isDisabled();
     }
 
-    @Override public @Nullable String getId() {
+    @Override public String getId() {
         return this.id;
     }
 
@@ -32,6 +42,11 @@ public class SelectableImpl implements Selectable {
 
     @Override public Selectable setOptions(List<Option> options) {
         this.options = options;
+        return this;
+    }
+
+    @Override public Selectable addOptions(Option... options) {
+        this.options.addAll(List.of(options));
         return this;
     }
 
@@ -51,6 +66,11 @@ public class SelectableImpl implements Selectable {
         private String emoji;
         private boolean defaultOption;
 
+        public OptionImpl(String display, String value) {
+            this.display = display;
+            this.value = value;
+        }
+
         public OptionImpl(Selectable.Option option) {
             this.display = option.getDisplay();
             this.value = option.getValue();
@@ -60,7 +80,7 @@ public class SelectableImpl implements Selectable {
         }
 
         @Override public String getDisplay() {
-            return null;
+            return this.display;
         }
 
         @Override public Option setDisplay(String display) {
@@ -69,7 +89,7 @@ public class SelectableImpl implements Selectable {
         }
 
         @Override public String getValue() {
-            return null;
+            return this.value;
         }
 
         @Override public Option setValue(String value) {
@@ -78,7 +98,7 @@ public class SelectableImpl implements Selectable {
         }
 
         @Override public @Nullable String getDescription() {
-            return null;
+            return this.description;
         }
 
         @Override public Option setDescription(String description) {
@@ -87,7 +107,7 @@ public class SelectableImpl implements Selectable {
         }
 
         @Override public @Nullable String getEmoji() {
-            return null;
+            return this.emoji;
         }
 
         @Override public Option setEmoji(String emoji) {
@@ -96,7 +116,7 @@ public class SelectableImpl implements Selectable {
         }
 
         @Override public boolean isDefault() {
-            return false;
+            return this.defaultOption;
         }
 
         @Override public Option setDefault(boolean defaultOption) {

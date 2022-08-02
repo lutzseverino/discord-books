@@ -12,6 +12,10 @@ public class ClickableImpl implements Clickable {
     private String emoji;
     private boolean disabled;
 
+    public ClickableImpl(Style style) {
+        this.style = style;
+    }
+
     public ClickableImpl(@NotNull Clickable clickable) {
         this.id = clickable.getId();
         this.url = clickable.getUrl();
