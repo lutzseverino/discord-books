@@ -1,11 +1,11 @@
-package st.networkers.discordbooks.jda.channel;
+package st.networkers.discordbooks.jda.discord.channel;
 
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.MessageChannel;
 import org.jetbrains.annotations.NotNull;
 import st.networkers.discordbooks.discord.channel.Receivable;
 import st.networkers.discordbooks.discord.message.Sendable;
-import st.networkers.discordbooks.jda.message.JDAMessage;
+import st.networkers.discordbooks.jda.discord.message.JDAMessage;
 
 public class JDAReceivable implements Receivable {
     private final MessageChannel channel;
