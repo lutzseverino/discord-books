@@ -1,6 +1,6 @@
-package st.networkers.discordbooks.message;
+package st.networkers.discordbooks.discord.message;
 
-import st.networkers.discordbooks.component.ActionableRow;
+import st.networkers.discordbooks.discord.component.ActionableRow;
 
 import java.util.List;
 

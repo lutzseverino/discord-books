@@ -2,10 +2,10 @@ package st.networkers.discordbooks.book;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import st.networkers.discordbooks.channel.Receivable;
-import st.networkers.discordbooks.component.ActionableRow;
-import st.networkers.discordbooks.component.Clickable;
-import st.networkers.discordbooks.message.Sendable;
+import st.networkers.discordbooks.discord.channel.Receivable;
+import st.networkers.discordbooks.discord.component.ActionableRow;
+import st.networkers.discordbooks.discord.component.Clickable;
+import st.networkers.discordbooks.discord.message.Sendable;
 
 import java.util.ArrayList;
 import java.util.List;

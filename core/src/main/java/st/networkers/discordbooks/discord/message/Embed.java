@@ -1,4 +1,4 @@
-package st.networkers.discordbooks.message;
+package st.networkers.discordbooks.discord.message;
 
 import java.awt.*;
 import java.time.OffsetDateTime;

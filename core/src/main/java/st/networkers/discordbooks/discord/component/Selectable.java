@@ -1,4 +1,4 @@
-package st.networkers.discordbooks.component;
+package st.networkers.discordbooks.discord.component;
 
 import org.jetbrains.annotations.Nullable;
 
