@@ -27,7 +27,6 @@ A lightweight and implementable library that helps you create multipage messages
 Add the following to your `pom.xml` file:
 
 ```xml
-
 <dependency>
     <groupId>com.lutzseverino.discordbooks</groupId>
     <artifactId>discord-books-SPIN</artifactId>
@@ -36,12 +35,13 @@ Add the following to your `pom.xml` file:
 ```
 
 Replace `SPIN` with the appropriate version you're looking for, and `VERSION` with the version you're looking for. Refer
-to the Releases tab to see the latest versions.
+to the [Releases tab](https://github.com/lutzseverino/discord-books/releases) to see the latest versions.
 
 ### Spins
 
-You can check all available spins on
-the [GitHub Packages](https://github.com/lutzseverino?tab=packages&repo_name=discord-books) tab.
+* Core
+* [JDA](https://github.com/DV8FromTheWorld/JDA) (Java Discord API)
+* [D4J](https://github.com/Discord4J/Discord4J) (Discord4J) (Coming soon)
 
 ## Features
 
