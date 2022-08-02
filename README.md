@@ -99,8 +99,8 @@ public class Example extends JDABook {
 
 ### Customizing buttons
 
-Navigation buttons can come in many styles, so you can choose which one you want by
-calling `#setNextClickable(Clickable)` and `#setPreviousClickable(Clickable)`.
+Navigation buttons can come in many styles, so you can create your own by calling `#setNextClickable(Clickable)`
+and `#setPreviousClickable(Clickable)`.
 
 After creating the `Clickables`, you'll have to add them manually by calling `#setClickables(Clickable...)`. This is
 required, so you can have control over the order of the buttons. You may also add extra buttons to this row.
