@@ -6,7 +6,8 @@ import net.dv8tion.jda.api.interactions.components.buttons.ButtonStyle;
 import org.jetbrains.annotations.NotNull;
 import st.networkers.discordbooks.book.Book;
 import st.networkers.discordbooks.cache.Cache;
-import st.networkers.discordbooks.jda.book.JDABook;
+import st.networkers.discordbooks.discord.message.Sendable;
+import st.networkers.discordbooks.jda.discord.message.JDAMessage;
 import st.networkers.discordbooks.jda.errors.JDABookErrorHandler;
 import st.networkers.discordbooks.jda.errors.JDABookErrorHandlerImpl;
 
@@ -29,20 +30,30 @@ public class JDABookButtonListener extends ListenerAdapter {
         if (event.getButton().getStyle() != ButtonStyle.LINK) {
             String id = event.getButton().getId();
 
-            //noinspection ConstantConditions
+            // ID must not be null, we're preventing this event from
+            // firing if the button is of type LINK.
+            assert id != null;
+
+            // Checks for at least: example@pageNum@ownerId
+            // Extra owner IDs seperated by # are not checked, as they might
+            // not be there.
+            if (!id.matches("[a-zA-Z]+@\\d+@\\d+")) return;
+
             String[] split = id.split("@");
             String bookID = split[0];
             int pageToSet = Integer.parseInt(split[1]);
             String[] ownerIDs = split[2].split("#");
-            JDABook book = (JDABook) books.get(bookID);
+            Book book = books.get(bookID);
 
             if (book != null) {
-                if (!book.isNavigationPublic() && Arrays.stream(ownerIDs).noneMatch(s -> event.getUser().getId().equals(s)))  {
+                if (!ownerIDs[0].equals("0") && Arrays.stream(ownerIDs).noneMatch(s -> event.getUser().getId().equals(s))) {
                     errorHandler.whenUserIsNotOwner(event);
                     return;
                 }
 
-                book.edit(event.deferEdit(), pageToSet, ownerIDs);
+                Sendable page = book.edit(pageToSet, ownerIDs);
+                event.editMessage(JDAMessage.buildMessage(page)).queue();
+
             } else errorHandler.whenBookIsNull(event);
         }
     }
