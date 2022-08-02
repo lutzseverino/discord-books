@@ -6,6 +6,10 @@ public interface Actionable {
 
     @Nullable String getId();
 
+    Actionable setId(String id);
+
+    Actionable setDisabled(boolean disabled);
+
     boolean isDisabled();
 
     default Type getType() {

@@ -8,6 +8,12 @@ public interface Clickable extends Actionable {
         return Type.CLICKABLE;
     }
 
+    Clickable setId(String id);
+
+    @Nullable String getUrl();
+
+    Clickable setUrl(String url);
+
     Style getStyle();
 
     Clickable setStyle(Style style);
@@ -16,17 +22,11 @@ public interface Clickable extends Actionable {
 
     Clickable setDisplay(String display);
 
-    @Nullable String getUrl();
-
-    Clickable setUrl(String url);
-
     @Nullable String getEmoji();
 
     Clickable setEmoji(String emoji);
 
     Clickable setDisabled(boolean disabled);
-
-    Clickable setId(String id);
 
     enum Style {
         PRIMARY,

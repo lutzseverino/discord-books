@@ -10,17 +10,29 @@ public interface Selectable extends Actionable {
         return Type.SELECTABLE;
     }
 
-    List<MenuOption> getOptions();
+    List<Option> getOptions();
 
-    interface MenuOption {
+    Selectable setOptions(List<Option> options);
+
+    interface Option {
         String getDisplay();
+
+        Option setDisplay(String display);
 
         String getValue();
 
+        Option setValue(String value);
+
         @Nullable String getDescription();
+
+        Option setDescription(String description);
+
+        @Nullable String getEmoji();
+
+        Option setEmoji(String emoji);
 
         boolean isDefault();
 
-        @Nullable String getEmoji();
+        Option setDefault(boolean defaultOption);
     }
 }
