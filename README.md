@@ -37,6 +37,12 @@ Add the following to your `pom.xml` file:
 </dependency> 
 ```
 
+Alternatively, for Gradle:
+
+```gradle
+implementation 'com.lutzseverino.discordbooks:discord-books-SPIN:VERSION'
+```
+
 Replace `SPIN` and `VERSION` with the appropriate values.
 
 ### Spins
