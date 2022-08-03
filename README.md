@@ -1,6 +1,8 @@
-![java](https://img.shields.io/badge/java-%23ED8B00.svg?style=flat&logo=java&logoColor=white) ![total lines](https://img.shields.io/tokei/lines/github/lutzseverino/discord-books) ![license](https://img.shields.io/github/license/lutzseverino/discord-books)
+![java](https://img.shields.io/badge/java-%23ED8B00.svg?style=flat&logo=oracle&logoColor=white) ![license](https://img.shields.io/github/license/lutzseverino/discord-books) ![Maven Central](https://img.shields.io/maven-central/v/com.lutzseverino.discordbooks/discord-books)
 
-<img alt="discord-books library showcase" align="right" src="https://user-images.githubusercontent.com/28309837/182421595-664c25ab-b3c5-4843-858a-a248d71a9896.gif" height="450">
+![GitHub last commit](https://img.shields.io/github/last-commit/lutzseverino/discord-books) ![total lines](https://img.shields.io/tokei/lines/github/lutzseverino/discord-books)
+
+<img alt="discord-books library showcase" align="right" src="https://user-images.githubusercontent.com/28309837/182421595-664c25ab-b3c5-4843-858a-a248d71a9896.gif" height="350">
 
 # Discord Books
 
@@ -9,7 +11,7 @@ A lightweight and implementable library that helps you create multipage messages
 ## Summary
 
 * [Installation](#installation)
-    * [Spins](#spins)
+  * [Spins](#spins)
 * [Features](#features)
 * [Usage](#usage)
     * [Creating the book](#creating-the-book)
@@ -27,6 +29,7 @@ A lightweight and implementable library that helps you create multipage messages
 Add the following to your `pom.xml` file:
 
 ```xml
+
 <dependency>
     <groupId>com.lutzseverino.discordbooks</groupId>
     <artifactId>discord-books-SPIN</artifactId>
@@ -34,14 +37,20 @@ Add the following to your `pom.xml` file:
 </dependency> 
 ```
 
-Replace `SPIN` with the appropriate version you're looking for, and `VERSION` with the version you're looking for. Refer
-to the [Releases tab](https://github.com/lutzseverino/discord-books/releases) to see the latest versions.
+Replace `SPIN` and `VERSION` with the appropriate values.
 
 ### Spins
 
 * Core
 * [JDA](https://github.com/DV8FromTheWorld/JDA) (Java Discord API)
 * [D4J](https://github.com/Discord4J/Discord4J) (Discord4J) (Coming soon)
+
+### Versions
+
+This is the latest version of the library on Maven Central. You can compile the library yourself for newer, unreleased
+versions.
+
+![Maven Central](https://img.shields.io/maven-central/v/com.lutzseverino.discordbooks/discord-books)
 
 ## Features
 
