@@ -73,9 +73,7 @@ Usage doesn't vary depending on the spin you're using.
 
 ### Creating the book
 
-By calling the super constructor, you can set the books' name. You may also specify if you want the book to be available
-for everyone and not only the owner.
-
+By calling the super constructor, you can set the name of the book.
 ```java
 public class Example extends Book {
     public Example() {
