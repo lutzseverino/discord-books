@@ -3,20 +3,22 @@ package com.lutzseverino.discordbooks.book;
 import com.lutzseverino.discordbooks.discord.channel.Receivable;
 import com.lutzseverino.discordbooks.discord.component.ActionableRow;
 import com.lutzseverino.discordbooks.discord.component.Clickable;
+import com.lutzseverino.discordbooks.discord.component.impl.ClickableImpl;
 import com.lutzseverino.discordbooks.discord.message.Sendable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.UnaryOperator;
 
-public abstract class Book {
+public class Book {
     private final String name;
     private final List<Sendable> pages = new ArrayList<>();
-    private final List<ActionableRow> actionableRows = new ArrayList<>();
-    private final List<Clickable> clickables = new ArrayList<>();
-    private Clickable previousClickable;
-    private Clickable nextClickable;
+    private final Clickable previousClickable = new ClickableImpl(Clickable.Style.PRIMARY).setDisplay("Previous");
+    private final Clickable nextClickable = new ClickableImpl(Clickable.Style.PRIMARY).setDisplay("Next");
+    private final List<Clickable> clickables = new ArrayList<>(List.of(this.previousClickable, this.nextClickable));
+    private final List<ActionableRow> actionableRows = new ArrayList<>(List.of(new ActionableRow(this.clickables)));
 
     public Book(String name) {
         this.name = name;
@@ -90,14 +92,16 @@ public abstract class Book {
     }
 
     /**
-     * Sets the items of the {@link ActionableRow} of {@link Clickable}s.
+     * Clears the default list and sets the items of
+     * the {@link ActionableRow} of {@link Clickable}s.
      *
      * @param clickables the {@link Clickable}s to set
      * @see #setClickables(Clickable...)
-     * @see #setNextClickable(Clickable)
-     * @see #setPreviousClickable(Clickable)
+     * @see #setNextClickable(UnaryOperator)
+     * @see #setPreviousClickable(UnaryOperator)
      */
     public void setClickables(List<Clickable> clickables) {
+        this.clickables.clear();
         this.clickables.addAll(clickables);
     }
 
@@ -106,10 +110,11 @@ public abstract class Book {
      *
      * @param clickables the {@link Clickable}s to set
      * @see #setClickables(Clickable...)
-     * @see #setNextClickable(Clickable)
-     * @see #setPreviousClickable(Clickable)
+     * @see #setNextClickable(UnaryOperator)
+     * @see #setPreviousClickable(UnaryOperator)
      */
     public void setClickables(Clickable... clickables) {
+        this.clickables.clear();
         this.clickables.addAll(List.of(clickables));
     }
 
@@ -127,10 +132,10 @@ public abstract class Book {
      * Some settings, such as the disabled state or ID will be overridden
      * at send time.
      *
-     * @param nextClickable the base {@link Clickable}
+     * @param nextClickable the operator to modify the {@link Clickable}
      */
-    public void setNextClickable(@NotNull Clickable nextClickable) {
-        this.nextClickable = nextClickable;
+    public void setNextClickable(@NotNull UnaryOperator<Clickable> nextClickable) {
+        nextClickable.apply(this.nextClickable);
     }
 
     /**
@@ -147,10 +152,10 @@ public abstract class Book {
      * Some settings, such as the disabled state or ID will be overridden
      * at send time.
      *
-     * @param previousClickable the base {@link Clickable}
+     * @param previousClickable the operator to modify the {@link Clickable}
      */
-    public void setPreviousClickable(@NotNull Clickable previousClickable) {
-        this.previousClickable = previousClickable;
+    public void setPreviousClickable(@NotNull UnaryOperator<Clickable> previousClickable) {
+        previousClickable.apply(this.previousClickable);
     }
 
     /**
@@ -175,7 +180,26 @@ public abstract class Book {
      *
      * @param actionRows the action rows to add
      */
+    public void setActionableRows(List<ActionableRow> actionRows) {
+        this.actionableRows.clear();
+        this.actionableRows.addAll(actionRows);
+    }
+
+
+    /**
+     * Adds {@link ActionableRow}s to the book.
+     * <p>
+     * This method should be used to add your own {@link ActionableRow}s,
+     * as well as the {@link ActionableRow} of {@link Clickable}s
+     * containing the navigation.
+     * <p>
+     * Discord allows a maximum of 5 rows per message, but this
+     * library doesn't limit the number of rows by itself.
+     *
+     * @param actionRows the action rows to add
+     */
     public void setActionableRows(ActionableRow... actionRows) {
+        this.actionableRows.clear();
         this.actionableRows.addAll(List.of(actionRows));
     }
 
@@ -246,7 +270,7 @@ public abstract class Book {
     public void buildNavigation(Sendable sendable, String... ownerIDs) {
         int index = pages.indexOf(sendable);
 
-        previousClickable = previousClickable.setDisabled(index == 0).setId(getName() + "@" + (index - 1) + "@" + String.join("#", ownerIDs));
-        nextClickable = nextClickable.setDisabled(index == pages.size() - 1).setId(getName() + "@" + (index + 1) + "@" + String.join("#", ownerIDs));
+        previousClickable.setDisabled(index == 0).setId(getName() + "@" + (index - 1) + "@" + String.join("#", ownerIDs));
+        nextClickable.setDisabled(index == pages.size() - 1).setId(getName() + "@" + (index + 1) + "@" + String.join("#", ownerIDs));
     }
 }

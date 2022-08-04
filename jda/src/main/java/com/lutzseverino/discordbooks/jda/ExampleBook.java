@@ -28,8 +28,8 @@ public class ExampleBook extends Book {
                                         .setDescription("Need more convincing? Too bad, I've got no more pages left."))
         );
 
-        setNextClickable(new ClickableImpl(Clickable.Style.PRIMARY).setEmoji("➡"));
-        setPreviousClickable(new ClickableImpl(Clickable.Style.PRIMARY).setEmoji("⬅️"));
+        setNextClickable(clickable -> clickable.setEmoji("➡"));
+        setPreviousClickable(clickable -> clickable.setEmoji("⬅️"));
 
         setClickables(
                 getPreviousClickable(),
