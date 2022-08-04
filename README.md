@@ -1,12 +1,10 @@
-![java](https://img.shields.io/badge/java-%23ED8B00.svg?style=flat&logo=oracle&logoColor=white) ![license](https://img.shields.io/github/license/lutzseverino/discord-books) ![Maven Central](https://img.shields.io/maven-central/v/com.lutzseverino.discordbooks/discord-books)
+![java language](https://img.shields.io/badge/java-%23ED8B00.svg?style=flat&logo=oracle&logoColor=white) ![license](https://img.shields.io/github/license/lutzseverino/discord-books) ![maven central version](https://img.shields.io/maven-central/v/com.lutzseverino.discordbooks/discord-books) ![gitHub last commit](https://img.shields.io/github/last-commit/lutzseverino/discord-books) ![total lines](https://img.shields.io/tokei/lines/github/lutzseverino/discord-books)
 
-![GitHub last commit](https://img.shields.io/github/last-commit/lutzseverino/discord-books) ![total lines](https://img.shields.io/tokei/lines/github/lutzseverino/discord-books)
+![github-frame](https://user-images.githubusercontent.com/28309837/182840517-972a184a-95c1-4cfb-ad82-e703af652cb6.png)
+![discord-books library showcase](https://user-images.githubusercontent.com/28309837/182843934-f5eb5cb9-3f76-44a9-82a2-20d1a1ee3648.gif)
 
-<img alt="discord-books library showcase" align="right" src="https://user-images.githubusercontent.com/28309837/182421595-664c25ab-b3c5-4843-858a-a248d71a9896.gif" height="350">
-
-# Discord Books
-
-A lightweight and implementable library that helps you create multipage messages automatically on Discord.
+## What is this?
+A lightweight, implementable library that provides pagination and helps you create multipage messages - or "books" - automatically on Discord. 
 
 ## Summary
 
