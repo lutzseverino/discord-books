@@ -1,10 +1,13 @@
 package com.lutzseverino.discordbooks.jda.discord.channel;
 
+import com.lutzseverino.discordbooks.DiscordBooks;
+import com.lutzseverino.discordbooks.book.Book;
 import com.lutzseverino.discordbooks.discord.channel.Receivable;
 import com.lutzseverino.discordbooks.discord.message.Sendable;
 import com.lutzseverino.discordbooks.jda.discord.message.JDAMessage;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.MessageChannel;
+import net.dv8tion.jda.api.requests.restaction.MessageAction;
 import org.jetbrains.annotations.NotNull;
 
 public class JDAReceivable implements Receivable {
@@ -14,12 +17,26 @@ public class JDAReceivable implements Receivable {
         this.channel = channel;
     }
 
-    public JDAReceivable(Guild guild, String channelId) {
+    public JDAReceivable(@NotNull Guild guild, String channelId) {
         this(guild.getTextChannelById(channelId));
     }
 
-    @Override public JDAReceivable receive(@NotNull Sendable sendable) {
+    @Override public void receive(@NotNull Sendable sendable) {
         channel.sendMessage(JDAMessage.buildMessage(sendable)).queue();
-        return this;
     }
+
+    @Override public void receive(Book book) {
+        receive(book, 0);
+    }
+
+    @Override public void receive(@NotNull Book book, int index) {
+        MessageAction action = channel.sendMessage(JDAMessage.buildMessage(book.build(index)));
+
+        if (book.getName() == null) action.queue(message -> {
+            book.setName(message.getId());
+            DiscordBooks.addCachedBook(book);
+        });
+        else action.queue();
+    }
+
 }

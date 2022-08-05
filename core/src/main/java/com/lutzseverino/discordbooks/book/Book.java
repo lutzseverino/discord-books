@@ -1,6 +1,5 @@
 package com.lutzseverino.discordbooks.book;
 
-import com.lutzseverino.discordbooks.discord.channel.Receivable;
 import com.lutzseverino.discordbooks.discord.component.ActionableRow;
 import com.lutzseverino.discordbooks.discord.component.Clickable;
 import com.lutzseverino.discordbooks.discord.component.impl.ClickableImpl;
@@ -13,15 +12,19 @@ import java.util.List;
 import java.util.function.UnaryOperator;
 
 public class Book {
-    private final String name;
     private final List<Sendable> pages = new ArrayList<>();
     private final Clickable previousClickable = new ClickableImpl(Clickable.Style.PRIMARY).setDisplay("Previous");
     private final Clickable nextClickable = new ClickableImpl(Clickable.Style.PRIMARY).setDisplay("Next");
     private final List<Clickable> clickables = new ArrayList<>(List.of(this.previousClickable, this.nextClickable));
     private final List<ActionableRow> actionableRows = new ArrayList<>(List.of(new ActionableRow(this.clickables)));
+    private final List<String> owners = new ArrayList<>();
+    private String name;
 
     public Book(String name) {
         this.name = name;
+    }
+
+    public Book() {
     }
 
     /**
@@ -29,6 +32,14 @@ public class Book {
      */
     public String getName() {
         return name;
+    }
+
+
+    /**
+     * @param name the name of the book
+     */
+    public void setName(String name) {
+        this.name = name;
     }
 
     /**
@@ -168,6 +179,10 @@ public class Book {
         return new ActionableRow(clickables);
     }
 
+    public List<ActionableRow> getActionableRows() {
+        return actionableRows;
+    }
+
     /**
      * Adds {@link ActionableRow}s to the book.
      * <p>
@@ -178,7 +193,7 @@ public class Book {
      * Discord allows a maximum of 5 rows per message, but this
      * library doesn't limit the number of rows by itself.
      *
-     * @param actionRows the action rows to add
+     * @param actionRows the {@link ActionableRow}s to set
      */
     public void setActionableRows(List<ActionableRow> actionRows) {
         this.actionableRows.clear();
@@ -196,7 +211,7 @@ public class Book {
      * Discord allows a maximum of 5 rows per message, but this
      * library doesn't limit the number of rows by itself.
      *
-     * @param actionRows the action rows to add
+     * @param actionRows the {@link ActionableRow}s to set
      */
     public void setActionableRows(ActionableRow... actionRows) {
         this.actionableRows.clear();
@@ -204,73 +219,49 @@ public class Book {
     }
 
     /**
-     * Sends the first book page to a specified {@link Receivable}.
-     *
-     * @param channel the {@link Receivable} that will receive the book
+     * @return the IDs of the owners of the book
      */
-    public void send(@NotNull Receivable channel) {
-        send(channel, 0, "0");
+    public List<String> getOwners() {
+        return owners;
     }
 
     /**
-     * Sends a given book page to a specified {@link Receivable}.
-     *
-     * @param channel the {@link Receivable} that will receive the book
-     * @param index   the page number to send
-     * @throws IndexOutOfBoundsException if the index is less than 0 or greater than the number of pages
+     * @param ids the IDs of the owners of the book
      */
-    public void send(@NotNull Receivable channel, int index) {
-        send(channel, index, "0");
+    public void setOwners(String... ids) {
+        this.owners.addAll(List.of(ids));
     }
 
     /**
-     * Sends the first book page to a specified {@link Receivable}
-     * and assigns the book's owners.
-     *
-     * @param channel  the {@link Receivable} that will receive the book
-     * @param ownerIDs the IDs of the users who own the book
+     * @param ids the IDs of the owners of the book
      */
-    public void send(@NotNull Receivable channel, @NotNull String... ownerIDs) {
-        send(channel, 0, ownerIDs);
+    public void setOwners(List<String> ids) {
+        this.owners.addAll(ids);
     }
 
     /**
-     * Sends a given book page to a specified {@link Receivable}
-     * and assigns the book's owners.
+     * Builds the first page of the book, modifying
+     * the stored {@link Clickable}s
      *
-     * @param channel  the {@link Receivable} that will receive the book
-     * @param index    the page number to send
-     * @param ownerIDs the IDs of the users who own the book
-     * @throws IndexOutOfBoundsException if the index is less than 0 or greater than the number of pages
+     * @return the built {@link Sendable}
      */
-    public void send(@NotNull Receivable channel, int index, @NotNull String... ownerIDs) {
+    public Sendable build() {
+        return build(0);
+    }
+
+    /**
+     * Builds a page of the book, modifying
+     * the stored {@link Clickable}s
+     *
+     * @param index the page number to build
+     * @return the built {@link Sendable}
+     */
+    public Sendable build(int index) {
         Sendable sendable = pages.get(index);
 
-        sendable.setActionableRows(actionableRows);
-        buildNavigation(sendable, ownerIDs);
+        previousClickable.setDisabled(index == 0).setId("book:" + getName() + "@" + (index - 1));
+        nextClickable.setDisabled(index == pages.size() - 1).setId("book:" + getName() + "@" + (index + 1));
 
-        channel.receive(sendable);
-    }
-
-    public Sendable edit(int index, @NotNull String... ownerIDs) {
-        Sendable sendable = pages.get(index);
-
-        sendable.setActionableRows(actionableRows);
-        buildNavigation(sendable, ownerIDs);
-
-        return sendable;
-    }
-
-    /**
-     * Checks the position of the {@link Sendable} in the book
-     * and changes the navigation accordingly.
-     *
-     * @param ownerIDs the IDs of the users who own the book
-     */
-    public void buildNavigation(Sendable sendable, String... ownerIDs) {
-        int index = pages.indexOf(sendable);
-
-        previousClickable.setDisabled(index == 0).setId(getName() + "@" + (index - 1) + "@" + String.join("#", ownerIDs));
-        nextClickable.setDisabled(index == pages.size() - 1).setId(getName() + "@" + (index + 1) + "@" + String.join("#", ownerIDs));
+        return sendable.setActionableRows(actionableRows);
     }
 }
