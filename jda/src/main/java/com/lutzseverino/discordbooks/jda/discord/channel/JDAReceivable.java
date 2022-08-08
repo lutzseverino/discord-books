@@ -30,12 +30,10 @@ public class JDAReceivable implements Receivable {
     }
 
     @Override public void receive(@NotNull Book book, int index) {
-        MessageAction action = channel.sendMessage(JDAMessage.buildMessage(book.build(index)));
+        MessageAction action = channel.sendMessage(JDAMessage.buildMessage(book.getPage(index)));
 
-        if (book.getName() == null) action.queue(message -> {
-            book.setName(message.getId());
-            DiscordBooks.addCachedBook(book);
-        });
+        if (book.getId().isEmpty())
+            action.queue(message -> DiscordBooks.getNamelessDatabase().set(message.getId(), book));
         else action.queue();
     }
 

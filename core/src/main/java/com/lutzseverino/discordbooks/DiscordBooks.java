@@ -1,44 +1,52 @@
 package com.lutzseverino.discordbooks;
 
 import com.lutzseverino.discordbooks.book.Book;
-import com.lutzseverino.discordbooks.cache.BookCache;
-import com.lutzseverino.discordbooks.cache.Cache;
+import com.lutzseverino.discordbooks.database.BookDB;
+import com.lutzseverino.discordbooks.database.impl.MapDB;
 import org.jetbrains.annotations.NotNull;
 
 public class DiscordBooks {
-    protected final Cache<Book> books = new BookCache();
+    private static BookDB namelessDatabase = new MapDB();
+    private static BookDB database = new MapDB();
+
+    public DiscordBooks() {
+    }
+
+    public static BookDB getNamelessDatabase() {
+        return namelessDatabase;
+    }
+
+    public DiscordBooks setNamelessDatabase(BookDB database) {
+        namelessDatabase = database;
+        return this;
+    }
+
+    public static BookDB getDatabase() {
+        return database;
+    }
+
+    public DiscordBooks setDatabase(BookDB database) {
+        DiscordBooks.database = database;
+        return this;
+    }
 
     /**
-     * Registers new books to the cache.
+     * @param id the id of the book
+     * @return the book with the given id, or null if it doesn't exist
+     */
+    public static Book getBook(String id) {
+        return database.get(id);
+    }
+
+    /**
+     * Registers books. These will persist
+     * as long as they exist in your source,
+     * assuming you add them on every startup.
      *
      * @param books the books to add
      */
-    public void addBooks(@NotNull Book... books) {
-        for (Book book : books)
-            this.books.add(book);
-    }
-
-    /**
-     * Registers a new book to the cache.
-     *
-     * @param book the book to add
-     */
-    public void addBook(Book book) {
-        addBooks(book);
-    }
-
-    /**
-     * @param name the name of the book
-     * @return the book with the given name
-     */
-    public Book getBook(String name) {
-        return books.get(name);
-    }
-
-    /**
-     * @return the book cache
-     */
-    public Cache<Book> getBooks() {
-        return books;
+    public void registerBooks(@NotNull Book... books) {
+        for (var book : books)
+            database.set(book.getId(), book);
     }
 }
