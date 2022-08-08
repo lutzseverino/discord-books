@@ -14,15 +14,24 @@ public class ExampleBook extends Book {
         super("example");
 
         addPages(
-                new SendableImpl("A regular ol' text message."),
-                new SendableImpl().setEmbeds(new EmbedImpl()
+                // First page, has regular text and a button of its own.
+                new SendableImpl("A regular ol' text message.")
+                        .addActionableRows(ActionableRow.of(
+                                new ClickableImpl(Clickable.Style.PRIMARY)
+                                        .setId("example-page-button")
+                                        .setDisplay("Pages can have buttons of their own!"))),
+                // Second page, has two embeds.
+                new SendableImpl().addEmbeds(
+                        new EmbedImpl()
                                 .setTitle("Embeds?")
                                 .setDescription("No problemo."),
                         new EmbedImpl()
                                 .setTitle("Another one, too!")
-                                .setDescription("Messages can have multiple of these!")),
+                                .setDescription("Messages can have multiple of these!")
+                ),
+                // Third page, has regular text and an embed.
                 new SendableImpl().setText("Text and embeds at the same time?")
-                        .setEmbeds(
+                        .addEmbeds(
                                 new EmbedImpl()
                                         .setTitle("I betcha")
                                         .setDescription("Need more convincing? Too bad, I've got no more pages left."))
