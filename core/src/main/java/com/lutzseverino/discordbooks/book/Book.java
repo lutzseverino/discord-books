@@ -31,7 +31,7 @@ public class Book {
     }
 
     /**
-     * @return the ID of the book
+     * @return the identifier of the book
      */
     public String getId() {
         return id;
@@ -39,7 +39,7 @@ public class Book {
 
 
     /**
-     * @param id the ID of the book
+     * @param id the identifier of the book
      * @return this book, for chained calls
      */
     public Book setId(String id) {
@@ -128,7 +128,7 @@ public class Book {
      * Allows you to set the base {@link Clickable} used to navigate to
      * the next page.
      * <p>
-     * Some settings, such as the disabled state or ID will be overridden
+     * Some settings, such as the disabled state or identifier will be overridden
      * at send time.
      *
      * @param nextClickable the operator to modify the {@link Clickable}
@@ -143,7 +143,7 @@ public class Book {
      * Allows you to set the base {@link Clickable} used to navigate to
      * the next page.
      * <p>
-     * Some settings, such as the disabled state or ID will be overridden
+     * Some settings, such as the disabled state or identifier will be overridden
      * at send time.
      *
      * @param nextClickable the {@link Clickable}
@@ -165,8 +165,8 @@ public class Book {
      * Allows you to set the base {@link Clickable} used to navigate to
      * the previous page.
      * <p>
-     * Some settings, such as the disabled state or ID will be overridden
-     * at send time.
+     * Some settings, such as the disabled state or identifier will
+     * be overridden at send time.
      *
      * @param previousClickable the operator to modify the {@link Clickable}
      * @return this book, for chained calls
@@ -180,8 +180,8 @@ public class Book {
      * Allows you to set the base {@link Clickable} used to navigate to
      * the previous page.
      * <p>
-     * Some settings, such as the disabled state or ID will be overridden
-     * at send time.
+     * Some settings, such as the disabled state or identifier will
+     * be overridden at send time.
      *
      * @param previousClickable the {@link Clickable}
      * @return this book, for chained calls
@@ -247,14 +247,14 @@ public class Book {
     }
 
     /**
-     * @return the IDs of the owners of the book
+     * @return the identifiers of the owners of the book
      */
     public List<String> getOwners() {
         return owners;
     }
 
     /**
-     * @param ids the IDs of the owners of the book
+     * @param ids the identifiers of the owners of the book
      */
     public Book setOwners(List<String> ids) {
         owners.clear();
@@ -263,7 +263,7 @@ public class Book {
     }
 
     /**
-     * @param ids the IDs of the owners of the book
+     * @param ids the identifiers of the owners of the book
      */
     @JsonSetter public Book setOwners(String... ids) {
         return setOwners(List.of(ids));
