@@ -33,7 +33,7 @@ public class JDAReceivable implements Receivable {
         MessageAction action = channel.sendMessage(JDAMessage.buildMessage(book.getPage(index)));
 
         if (book.getId().isEmpty())
-            action.queue(message -> DiscordBooks.getNamelessDatabase().set(message.getId(), book));
+            action.queue(message -> DiscordBooks.getTemporaryDatabase().set(message.getId(), book));
         else action.queue();
     }
 

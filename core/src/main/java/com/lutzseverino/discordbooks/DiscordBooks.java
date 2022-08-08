@@ -6,18 +6,18 @@ import com.lutzseverino.discordbooks.database.impl.MapDB;
 import org.jetbrains.annotations.NotNull;
 
 public class DiscordBooks {
-    private static BookDB namelessDatabase = new MapDB();
+    private static BookDB temporaryDatabase = new MapDB();
     private static BookDB database = new MapDB();
 
     public DiscordBooks() {
     }
 
-    public static BookDB getNamelessDatabase() {
-        return namelessDatabase;
+    public static BookDB getTemporaryDatabase() {
+        return temporaryDatabase;
     }
 
-    public DiscordBooks setNamelessDatabase(BookDB database) {
-        namelessDatabase = database;
+    public DiscordBooks setTemporaryDatabase(BookDB database) {
+        temporaryDatabase = database;
         return this;
     }
 

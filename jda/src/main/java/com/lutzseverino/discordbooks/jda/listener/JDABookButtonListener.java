@@ -35,7 +35,7 @@ public class JDABookButtonListener extends ListenerAdapter {
 
         boolean nameless = bookId.isEmpty();
         bookId = nameless ? event.getMessageId() : bookId;
-        BookDB database = nameless ? DiscordBooks.getNamelessDatabase() : DiscordBooks.getDatabase();
+        BookDB database = nameless ? DiscordBooks.getTemporaryDatabase() : DiscordBooks.getDatabase();
 
         Book book = database.get(bookId);
 
