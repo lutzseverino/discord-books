@@ -10,7 +10,7 @@ import java.util.List;
 public class SendableImpl implements Sendable {
     private String text;
     private List<Embed> embeds = new ArrayList<>();
-    private List<ActionableRow> actionableRows;
+    private List<ActionableRow> actionableRows = new ArrayList<>();
 
     public SendableImpl() {
     }
@@ -43,9 +43,17 @@ public class SendableImpl implements Sendable {
         return this;
     }
 
-    @Override public Sendable addEmbeds(Embed... embeds) {
-        this.embeds.addAll(List.of(embeds));
+    @Override public Sendable setEmbeds(Embed... embeds) {
+        return setEmbeds(List.of(embeds));
+    }
+
+    @Override public Sendable addEmbeds(List<Embed> embeds) {
+        this.embeds.addAll(embeds);
         return this;
+    }
+
+    @Override public Sendable addEmbeds(Embed... embeds) {
+        return addEmbeds(List.of(embeds));
     }
 
     @Override public List<ActionableRow> getActionableRows() {
@@ -55,5 +63,18 @@ public class SendableImpl implements Sendable {
     @Override public Sendable setActionableRows(List<ActionableRow> actionableRows) {
         this.actionableRows = actionableRows;
         return this;
+    }
+
+    @Override public Sendable setActionableRows(ActionableRow... actionableRows) {
+        return setActionableRows(List.of(actionableRows));
+    }
+
+    @Override public Sendable addActionableRows(List<ActionableRow> actionableRows) {
+        this.actionableRows.addAll(actionableRows);
+        return this;
+    }
+
+    @Override public Sendable addActionableRows(ActionableRow... actionableRows) {
+        return addActionableRows(List.of(actionableRows));
     }
 }

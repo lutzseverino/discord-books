@@ -115,9 +115,17 @@ public class EmbedImpl implements Embed {
         return this;
     }
 
-    @Override public Embed addFields(Field... field) {
-        this.fields.addAll(List.of(field));
+    @Override public Embed setFields(Field... fields) {
+        return setFields(List.of(fields));
+    }
+
+    @Override public Embed addFields(List<Field> fields) {
+        this.fields.addAll(fields);
         return this;
+    }
+
+    @Override public Embed addFields(Field... field) {
+        return addFields(List.of(field));
     }
 
     public static class AuthorImpl implements Embed.Author {
