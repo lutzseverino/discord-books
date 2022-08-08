@@ -15,14 +15,14 @@ public class ExampleBook extends Book {
 
         addPages(
                 new SendableImpl("A regular ol' text message."),
-                new SendableImpl().addEmbeds(new EmbedImpl()
+                new SendableImpl().setEmbeds(new EmbedImpl()
                                 .setTitle("Embeds?")
                                 .setDescription("No problemo."),
                         new EmbedImpl()
                                 .setTitle("Another one, too!")
                                 .setDescription("Messages can have multiple of these!")),
                 new SendableImpl().setText("Text and embeds at the same time?")
-                        .addEmbeds(
+                        .setEmbeds(
                                 new EmbedImpl()
                                         .setTitle("I betcha")
                                         .setDescription("Need more convincing? Too bad, I've got no more pages left."))
@@ -31,7 +31,7 @@ public class ExampleBook extends Book {
         setNextClickable(clickable -> clickable.setEmoji("➡"));
         setPreviousClickable(clickable -> clickable.setEmoji("⬅️"));
 
-        setClickables(
+        addClickables(
                 getPreviousClickable(),
                 new ClickableImpl(Clickable.Style.DANGER)
                         .setId("example-danger")
@@ -39,7 +39,7 @@ public class ExampleBook extends Book {
                 getNextClickable()
         );
 
-        setActionableRows(
+        addActionableRows(
                 getClickableRow(),
                 ActionableRow.of(
                         new ClickableImpl(Clickable.Style.SECONDARY)
