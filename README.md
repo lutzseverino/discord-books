@@ -10,7 +10,7 @@ automatically on Discord.
 
 ## Summary
 
-- [What is this?](#what-is-this-)
+- [What is this?](#what-is-this?)
 - [Summary](#summary)
 - [Installation](#installation)
   * [Available spins](#available-spins)
