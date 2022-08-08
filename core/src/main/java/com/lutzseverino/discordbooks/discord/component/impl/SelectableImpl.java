@@ -1,5 +1,7 @@
 package com.lutzseverino.discordbooks.discord.component.impl;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.lutzseverino.discordbooks.discord.component.Selectable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -11,7 +13,8 @@ public class SelectableImpl implements Selectable {
     private List<Option> options;
     private boolean disabled;
 
-    public SelectableImpl(String id, List<Option> options) {
+    @JsonCreator
+    public SelectableImpl(@JsonProperty("id") String id, @JsonProperty("options") List<Option> options) {
         this.id = id;
         this.options = options;
     }
@@ -66,7 +69,8 @@ public class SelectableImpl implements Selectable {
         private String emoji;
         private boolean defaultOption;
 
-        public OptionImpl(String display, String value) {
+        @JsonCreator
+        public OptionImpl(@JsonProperty("display") String display, @JsonProperty("value") String value) {
             this.display = display;
             this.value = value;
         }

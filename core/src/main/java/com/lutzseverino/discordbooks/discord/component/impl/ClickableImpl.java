@@ -1,5 +1,7 @@
 package com.lutzseverino.discordbooks.discord.component.impl;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.lutzseverino.discordbooks.discord.component.Clickable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -12,7 +14,8 @@ public class ClickableImpl implements Clickable {
     private String emoji;
     private boolean disabled;
 
-    public ClickableImpl(Style style) {
+    @JsonCreator
+    public ClickableImpl(@JsonProperty("style") Style style) {
         this.style = style;
     }
 

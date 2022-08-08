@@ -1,9 +1,16 @@
 package com.lutzseverino.discordbooks.discord.component;
 
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.lutzseverino.discordbooks.discord.component.impl.SelectableImpl;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "type")
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = SelectableImpl.class, name = "default"),
+})
 public interface Selectable extends Actionable {
 
     @Override default Type getType() {
@@ -16,6 +23,10 @@ public interface Selectable extends Actionable {
 
     Selectable addOptions(Option... options);
 
+    @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "type")
+    @JsonSubTypes({
+            @JsonSubTypes.Type(value = SelectableImpl.OptionImpl.class, name = "default"),
+    })
     interface Option {
         String getDisplay();
 
