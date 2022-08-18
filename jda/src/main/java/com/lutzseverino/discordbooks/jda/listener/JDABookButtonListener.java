@@ -24,34 +24,30 @@ public class JDABookButtonListener extends ListenerAdapter {
     }
 
     @Override public void onButtonInteraction(@NotNull ButtonInteractionEvent event) {
-        String buttonId = event.getButton().getId();
-        if (buttonId == null || !buttonId.startsWith("book:")) return;
+        String buttonId = event.getComponentId();
+
+        if (!buttonId.startsWith("book:")) return;
 
         buttonId = buttonId.substring("book:".length());
 
         String[] split = buttonId.split("@");
         String bookId = split[0];
+        boolean temporary = bookId.isEmpty();
         int index = Integer.parseInt(split[1]);
 
-        boolean nameless = bookId.isEmpty();
-        bookId = nameless ? event.getMessageId() : bookId;
-        BookDB database = nameless ? DiscordBooks.getTemporaryDatabase() : DiscordBooks.getDatabase();
+        bookId = temporary ? event.getMessageId() : bookId;
 
+        BookDB database = temporary ? DiscordBooks.getTemporaryDatabase() : DiscordBooks.getDatabase();
         Book book = database.get(bookId);
 
         if (book != null) {
             List<String> owners = book.getOwners();
 
-            if (!owners.isEmpty() && owners.stream().noneMatch(s -> event.getUser().getId().equals(s))) {
-                errorHandler.whenUserIsNotOwner(event);
-                return;
-            }
-
-            event.editMessage(JDAMessage.buildMessage(book.getPage(index))).queue();
-
-            // If the book has no name, we'll need to update it in the database.
-            if (nameless) database.set(event.getMessageId(), book);
-
+            if (owners.isEmpty() || owners.stream().anyMatch(s -> event.getUser().getId().equals(s))) {
+                event.editMessage(JDAMessage.buildMessage(book.getPage(index))).queue();
+                // If the book is temporary, the updated book will be saved.
+                if (temporary) database.set(event.getMessageId(), book);
+            } else errorHandler.whenUserIsNotOwner(event);
         } else errorHandler.whenBookIsNull(event);
 
     }
