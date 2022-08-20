@@ -13,22 +13,22 @@ automatically on Discord.
 - [What is this?](#what-is-this?)
 - [Summary](#summary)
 - [Installation](#installation)
-  * [Available spins](#available-spins)
-  * [Versions](#versions)
+    * [Available spins](#available-spins)
+    * [Versions](#versions)
 - [Features](#features)
 - [Usage](#usage)
-  * [Instantiating the library](#instantiating-the-library)
-    + [Available default database technologies](#available-default-database-technologies)
-  * [Creating the book](#creating-the-book)
-  * [Adding pages](#adding-pages)
-  * [Customizing buttons](#customizing-buttons)
-  * [Adding component rows](#adding-component-rows)
-  * [Building the book](#building-the-book)
-  * [Registering the books](#registering-the-books)
-  * [Sending the books](#sending-the-books)
-  * [Sending on-the-go books](#sending-on-the-go-books)
-  * [Listening to the button event](#listening-to-the-button-event)
-  * [Handling errors](#handling-errors)
+    * [Instantiating the library](#instantiating-the-library)
+        + [Available default database technologies](#available-default-database-technologies)
+    * [Creating the book](#creating-the-book)
+    * [Adding pages](#adding-pages)
+    * [Customizing buttons](#customizing-buttons)
+    * [Adding component rows](#adding-component-rows)
+    * [Building the book](#building-the-book)
+    * [Registering the books](#registering-the-books)
+    * [Sending the books](#sending-the-books)
+    * [Sending on-the-go books](#sending-on-the-go-books)
+    * [Listening to the button event](#listening-to-the-button-event)
+    * [Handling errors](#handling-errors)
 - [Credits](#credits)
 
 ## Installation
@@ -36,6 +36,7 @@ automatically on Discord.
 Add the following to your `pom.xml` file:
 
 ```xml
+
 <dependency>
     <groupId>com.lutzseverino.discordbooks</groupId>
     <artifactId>discord-books-SPIN</artifactId>
@@ -265,6 +266,7 @@ public class Main {
     }
 }
 ```
+
 ### Sending the books
 
 That was easy, right? Let's send the books!
@@ -282,8 +284,8 @@ jdaReceivable.receive(DiscordBooks.getBook("example"));
 Books don't necessarily need to be registered to be sent, you can create and send books on the spot.
 
 ```java
-public class Main {
-    public static void main(String[] args) {
+public class Foo extends ListenerAdapter {
+    @Override public void onMessageReceived(@NotNull MessageReceivedEvent event) {
         JDAReceivable jdaReceivable = new JDAReceivable(event.getChannel());
 
         jdaReceivable.receive(new Book()
