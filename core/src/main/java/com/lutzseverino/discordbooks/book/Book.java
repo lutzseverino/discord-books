@@ -16,10 +16,10 @@ import java.util.function.UnaryOperator;
 public class Book {
     private final List<Sendable> pages = new ArrayList<>();
     private final List<String> owners = new ArrayList<>();
-    private Clickable previousClickable;
-    private Clickable nextClickable;
     private final List<Clickable> clickables = new ArrayList<>();
     private final List<ActionableRow> actionableRows = new ArrayList<>();
+    private Clickable previousClickable;
+    private Clickable nextClickable;
     private String id;
 
     public Book(String id) {
