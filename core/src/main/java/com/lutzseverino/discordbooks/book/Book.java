@@ -16,18 +16,22 @@ import java.util.function.UnaryOperator;
 public class Book {
     private final List<Sendable> pages = new ArrayList<>();
     private final List<String> owners = new ArrayList<>();
-    private Clickable previousClickable = new ClickableImpl(Clickable.Style.PRIMARY).setDisplay("Previous");
-    private Clickable nextClickable = new ClickableImpl(Clickable.Style.PRIMARY).setDisplay("Next");
-    private final List<Clickable> clickables = new ArrayList<>(List.of(previousClickable, nextClickable));
-    private final List<ActionableRow> actionableRows = new ArrayList<>(List.of(ActionableRow.of(clickables)));
+    private Clickable previousClickable;
+    private Clickable nextClickable;
+    private final List<Clickable> clickables = new ArrayList<>();
+    private final List<ActionableRow> actionableRows = new ArrayList<>();
     private String id;
 
     public Book(String id) {
         this.id = id;
+        previousClickable = new ClickableImpl(Clickable.Style.PRIMARY).setDisplay("Previous");
+        nextClickable = new ClickableImpl(Clickable.Style.PRIMARY).setDisplay("Next");
+        clickables.addAll(List.of(previousClickable, nextClickable));
+        actionableRows.add(ActionableRow.of(clickables));
     }
 
     public Book() {
-        this.id = "";
+        this("");
     }
 
     /**
