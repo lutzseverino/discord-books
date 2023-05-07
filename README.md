@@ -1,12 +1,9 @@
 ![java language](https://img.shields.io/badge/java-%23ED8B00.svg?style=flat&logo=oracle&logoColor=white) ![license](https://img.shields.io/github/license/lutzseverino/discord-books) ![maven central version](https://img.shields.io/maven-central/v/com.lutzseverino.discordbooks/discord-books) ![gitHub last commit](https://img.shields.io/github/last-commit/lutzseverino/discord-books) ![total lines](https://img.shields.io/tokei/lines/github/lutzseverino/discord-books)
 
-![github-frame](https://user-images.githubusercontent.com/28309837/236678602-2f23d37f-6056-4f3f-b719-344fd9ee50ef.png)
+![discord-books](https://user-images.githubusercontent.com/28309837/236696025-3efb244f-6bc0-4bee-a515-94c9dfc9e44e.png)
 ![discord-books library showcase](https://user-images.githubusercontent.com/28309837/182843934-f5eb5cb9-3f76-44a9-82a2-20d1a1ee3648.gif)
 
-## What is this?
-
-A lightweight, implementable library that provides pagination and helps you create multipage messages - or "books" -
-automatically on Discord.
+Discord Books is a lightweight, implementable library that provides message pagination for Discord.
 
 ## Installation
 
