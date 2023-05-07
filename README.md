@@ -1,6 +1,6 @@
 ![java language](https://img.shields.io/badge/java-%23ED8B00.svg?style=flat&logo=oracle&logoColor=white) ![license](https://img.shields.io/github/license/lutzseverino/discord-books) ![maven central version](https://img.shields.io/maven-central/v/com.lutzseverino.discordbooks/discord-books) ![gitHub last commit](https://img.shields.io/github/last-commit/lutzseverino/discord-books) ![total lines](https://img.shields.io/tokei/lines/github/lutzseverino/discord-books)
 
-![github-frame](https://user-images.githubusercontent.com/28309837/182840517-972a184a-95c1-4cfb-ad82-e703af652cb6.png)
+![github-frame](https://user-images.githubusercontent.com/28309837/236678602-2f23d37f-6056-4f3f-b719-344fd9ee50ef.png)
 ![discord-books library showcase](https://user-images.githubusercontent.com/28309837/182843934-f5eb5cb9-3f76-44a9-82a2-20d1a1ee3648.gif)
 
 ## What is this?
